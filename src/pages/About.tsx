@@ -17,8 +17,8 @@ const values = [
     text: 'We never guarantee approvals or quote rates we cannot deliver. Eligibility is always subject to lender assessment.',
   },
   {
-    title: 'One point of contact',
-    text: 'From enquiry to disbursal and beyond, you deal with one accountable team rather than a call-centre queue.',
+    title: 'Clear communication',
+    text: 'We aim to explain the enquiry process, documents and lender-dependent next steps in straightforward language.',
   },
 ];
 
@@ -49,17 +49,13 @@ export default function About() {
 
       <section className="container-site grid gap-12 py-16 lg:grid-cols-2">
         <div>
-          <SectionHeading eyebrow="Our Story" title="Built on referrals, not advertising" align="left" />
+          <SectionHeading eyebrow="What We Do" title="Vehicle finance assistance, made clearer" align="left" />
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-neutral-400 sm:text-base">
             <p>
-              Heritage Auto Finance started with a simple observation: people in Mehsana and across Gujarat were being sold vehicle loans — not advised on them. Rates, tenures and charges were
-              explained only after commitment.
+              Choosing vehicle finance can involve comparing eligibility, documents, repayment terms and lender requirements. We help customers understand the enquiry process before they take the next step.
             </p>
             <p>
-              We set out to flip that. Today we assist with new car finance, used car finance, car refinance,
-              commercial vehicle finance and insurance assistance, working with banks and NBFCs that operate
-              in Gujarat. Most of our customers arrive the way we like best: referred by someone we helped
-              before.
+              Our services include new car finance, used car finance, car refinance, commercial vehicle finance and insurance assistance. Where a customer chooses to proceed, relevant details may be shared with a prospective bank, NBFC or insurer for its assessment.
             </p>
             <p>
               We are a finance assistance service. We are not a bank and we do not lend directly — loan
