@@ -25,7 +25,7 @@ export const site = {
   hours: 'Mon – Sat, 9:30 AM – 7:00 PM',
   social: {
     facebook: 'https://www.facebook.com/share/1F1PD2Czew/',
-    instagram: 'https://www.instagram.com/heritageautofinance?gwpx=N3pjczhjbXE1dW01',
+    instagram: 'https://www.instagram.com/heritageautofinance/',
   },
   // Official Heritage logo: public/brand/heritage-logo.webp
   logoSrc: '/brand/heritage-logo.webp' as string | null,
