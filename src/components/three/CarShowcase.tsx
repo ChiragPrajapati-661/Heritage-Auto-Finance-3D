@@ -89,6 +89,32 @@ function CarModel({ m }: { m: Mats }) {
   );
 }
 
+function ShowroomRotation({
+  group,
+  target,
+  current,
+  dragging,
+  reducedMotion,
+  children,
+}: {
+  group: React.RefObject<THREE.Group | null>;
+  target: React.MutableRefObject<number>;
+  current: React.MutableRefObject<number>;
+  dragging: React.MutableRefObject<boolean>;
+  reducedMotion: boolean;
+  children: React.ReactNode;
+}) {
+  // This component is rendered inside <Canvas>, so R3F hooks are valid here.
+  useFrame(() => {
+    if (!group.current) return;
+    if (!dragging.current && !reducedMotion) target.current += 0.0035;
+    current.current += (target.current - current.current) * 0.08;
+    group.current.rotation.y = current.current;
+  });
+
+  return <group ref={group}>{children}</group>;
+}
+
 /**
  * Draggable showroom stage: the user rotates the car a full 360° by dragging.
  * Falls back to a slow auto-rotate when idle (or always, with reduced motion).
@@ -102,13 +128,6 @@ export default function CarShowcase() {
   const lastX = useRef(0);
   const [hint, setHint] = useState(true);
   const m = useMemo(buildCarMaterials, []);
-
-  useFrame(() => {
-    if (!group.current) return;
-    if (!dragging.current && !reducedMotion) target.current += 0.0035;
-    current.current += (target.current - current.current) * 0.08;
-    group.current.rotation.y = current.current;
-  });
 
   const onPointerDown = (e: React.PointerEvent) => {
     dragging.current = true;
@@ -146,9 +165,15 @@ export default function CarShowcase() {
           <spotLight position={[6, 8, 4]} angle={0.5} penumbra={0.8} intensity={130} color="#f5e3a8" castShadow shadow-mapSize={[1024, 1024]} />
           <spotLight position={[-7, 5, -5]} angle={0.6} penumbra={1} intensity={70} color="#6d30b4" />
           <pointLight position={[0, 2, 6]} intensity={10} color={GOLD} />
-          <group ref={group}>
+          <ShowroomRotation
+            group={group}
+            target={target}
+            current={current}
+            dragging={dragging}
+            reducedMotion={reducedMotion}
+          >
             <CarModel m={m} />
-          </group>
+          </ShowroomRotation>
           <ContactShadows position={[0, -0.78, 0]} opacity={0.65} scale={12} blur={2.6} far={4} color="#000000" />
           <Environment preset="city" />
         </Canvas>
