@@ -45,52 +45,104 @@ function Wheel({ x, z, material }: { x: number; z: number; material: THREE.MeshS
 }
 
 function CarModel({ m }: { m: Mats }) {
+  const bodyGeometry = useMemo(() => {
+    const shape = new THREE.Shape();
+    shape.moveTo(-2.35, 0.48);
+    shape.lineTo(-2.28, 0.86);
+    shape.quadraticCurveTo(-2.18, 1.02, -1.88, 1.05);
+    shape.lineTo(-1.28, 1.08);
+    shape.quadraticCurveTo(-1.04, 1.08, -0.86, 1.25);
+    shape.lineTo(-0.34, 1.72);
+    shape.quadraticCurveTo(-0.15, 1.86, 0.12, 1.86);
+    shape.lineTo(1.08, 1.82);
+    shape.quadraticCurveTo(1.38, 1.78, 1.58, 1.52);
+    shape.lineTo(2.05, 1.12);
+    shape.quadraticCurveTo(2.28, 1.02, 2.38, 0.82);
+    shape.lineTo(2.32, 0.48);
+    shape.lineTo(1.9, 0.48);
+    shape.absarc(1.38, 0.48, 0.42, 0, Math.PI, true);
+    shape.lineTo(-0.92, 0.48);
+    shape.absarc(-1.42, 0.48, 0.42, 0, Math.PI, true);
+    shape.lineTo(-2.35, 0.48);
+    const geometry = new THREE.ExtrudeGeometry(shape, {
+      depth: 1.82,
+      bevelEnabled: true,
+      bevelSegments: 3,
+      steps: 1,
+      bevelSize: 0.07,
+      bevelThickness: 0.07,
+      curveSegments: 16,
+    });
+    geometry.translate(0, 0, -0.91);
+    return geometry;
+  }, []);
+
+  const cabinGeometry = useMemo(() => {
+    const shape = new THREE.Shape();
+    shape.moveTo(-1.15, 1.12);
+    shape.lineTo(-0.48, 1.72);
+    shape.quadraticCurveTo(-0.32, 1.82, -0.08, 1.82);
+    shape.lineTo(0.92, 1.78);
+    shape.quadraticCurveTo(1.08, 1.76, 1.2, 1.58);
+    shape.lineTo(1.62, 1.12);
+    shape.closePath();
+    const geometry = new THREE.ExtrudeGeometry(shape, {
+      depth: 1.48,
+      bevelEnabled: true,
+      bevelSegments: 2,
+      steps: 1,
+      bevelSize: 0.035,
+      bevelThickness: 0.035,
+    });
+    geometry.translate(0, 0, -0.74);
+    return geometry;
+  }, []);
+
   return (
-    <group position={[0, -0.75, 0]} scale={1.25}>
-      <mesh castShadow position={[0, 0.62, 0]}>
-        <boxGeometry args={[4.4, 0.55, 1.9]} />
+    <group position={[0, -0.75, 0]} scale={1.18}>
+      <mesh geometry={bodyGeometry} castShadow receiveShadow>
         <primitive object={m.body} attach="material" />
       </mesh>
-      <mesh castShadow position={[-0.25, 1.08, 0]}>
-        <boxGeometry args={[2.3, 0.52, 1.7]} />
+      <mesh geometry={cabinGeometry} castShadow>
         <primitive object={m.glass} attach="material" />
       </mesh>
-      <mesh castShadow position={[1.75, 0.78, 0]} rotation={[0, 0, -0.18]}>
-        <boxGeometry args={[1.2, 0.3, 1.8]} />
-        <primitive object={m.body} attach="material" />
-      </mesh>
-      <mesh castShadow position={[-2.0, 0.8, 0]} rotation={[0, 0, 0.2]}>
-        <boxGeometry args={[0.9, 0.3, 1.8]} />
-        <primitive object={m.body} attach="material" />
-      </mesh>
-      <mesh position={[0, 0.9, 0]}>
-        <boxGeometry args={[4.42, 0.05, 1.92]} />
+      {/* Gold lower-body pinstripe */}
+      <mesh position={[0, 0.83, 0]} scale={[1, 1, 0.94]}>
+        <boxGeometry args={[4.55, 0.035, 1.88]} />
         <primitive object={m.gold} attach="material" />
       </mesh>
-      <mesh position={[2.2, 0.6, 0]}>
-        <boxGeometry args={[0.06, 0.28, 1.3]} />
+      {/* Front grille and bumper */}
+      <mesh position={[2.34, 0.69, 0]}>
+        <boxGeometry args={[0.07, 0.28, 0.78]} />
+        <meshStandardMaterial color="#111116" metalness={0.75} roughness={0.3} />
+      </mesh>
+      <mesh position={[2.37, 0.53, 0]}>
+        <boxGeometry args={[0.12, 0.09, 1.45]} />
         <primitive object={m.gold} attach="material" />
       </mesh>
-      <mesh position={[2.21, 0.78, 0.6]}>
-        <boxGeometry args={[0.05, 0.12, 0.42]} />
+      {/* LED headlights */}
+      <mesh position={[2.27, 0.91, 0.58]} rotation={[0, 0.12, 0]}>
+        <boxGeometry args={[0.08, 0.12, 0.42]} />
         <primitive object={m.headlight} attach="material" />
       </mesh>
-      <mesh position={[2.21, 0.78, -0.6]}>
-        <boxGeometry args={[0.05, 0.12, 0.42]} />
+      <mesh position={[2.27, 0.91, -0.58]} rotation={[0, -0.12, 0]}>
+        <boxGeometry args={[0.08, 0.12, 0.42]} />
         <primitive object={m.headlight} attach="material" />
       </mesh>
-      <mesh position={[-2.21, 0.78, 0.6]}>
-        <boxGeometry args={[0.05, 0.1, 0.4]} />
+      {/* Rear LED lamps */}
+      <mesh position={[-2.3, 0.88, 0.58]}>
+        <boxGeometry args={[0.08, 0.11, 0.4]} />
         <primitive object={m.tail} attach="material" />
       </mesh>
-      <mesh position={[-2.21, 0.78, -0.6]}>
-        <boxGeometry args={[0.05, 0.1, 0.4]} />
+      <mesh position={[-2.3, 0.88, -0.58]}>
+        <boxGeometry args={[0.08, 0.11, 0.4]} />
         <primitive object={m.tail} attach="material" />
       </mesh>
-      <Wheel x={1.45} z={0.98} material={m.rubber} />
-      <Wheel x={1.45} z={-0.98} material={m.rubber} />
-      <Wheel x={-1.45} z={0.98} material={m.rubber} />
-      <Wheel x={-1.45} z={-0.98} material={m.rubber} />
+      {/* Four alloy wheels */}
+      <Wheel x={1.38} z={0.92} material={m.rubber} />
+      <Wheel x={1.38} z={-0.92} material={m.rubber} />
+      <Wheel x={-1.42} z={0.92} material={m.rubber} />
+      <Wheel x={-1.42} z={-0.92} material={m.rubber} />
     </group>
   );
 }
