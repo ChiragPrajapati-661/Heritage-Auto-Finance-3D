@@ -78,6 +78,7 @@ export default function FinanceEnquiryForm({
           vehicle_type: form.vehicleType,
           enquiry_type: form.enquiryType,
           message: form.message.trim() || null,
+          consent_given: true,
         });
         stored = !error;
         if (error) console.error('Failed to save enquiry:', error.message);
