@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { site, whatsappLink } from '@/config/site';
 import { calculateEmi } from '@/lib/finance';
+import { pexels } from '@/lib/media';
 
 interface VehicleAngle {
   id: string;
@@ -89,7 +90,7 @@ const SHOWCASE_CATEGORIES: ShowcaseCategory[] = [
   },
   {
     id: 'used-car',
-    name: 'Certified Pre-Owned',
+    name: 'Pre-Owned Vehicles',
     tagline: 'Pre-owned SUVs & sedans with valuation and finance assistance',
     badge: 'Pre-Owned Selection',
     path: '/services/used-car-finance',
@@ -208,6 +209,19 @@ const SHOWCASE_CATEGORIES: ShowcaseCategory[] = [
 
 const TENURE_OPTIONS = [12, 24, 36, 48, 60, 72, 84];
 
+const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  'new-car': pexels.newCar,
+  'used-car': pexels.usedCar,
+  commercial: pexels.commercial,
+  refinance: pexels.refinance,
+};
+
+function handleShowcaseImageError(event: React.SyntheticEvent<HTMLImageElement>, categoryId: string) {
+  const image = event.currentTarget;
+  image.onerror = null;
+  image.src = CATEGORY_FALLBACK_IMAGES[categoryId] || pexels.newCar;
+}
+
 function formatCurrency(amount: number): string {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -312,6 +326,9 @@ export default function CarShowcase() {
             <img
               src={activeAngle.image}
               alt={`${activeCategory.name} - ${activeAngle.label}`}
+              loading="lazy"
+              decoding="async"
+              onError={(event) => handleShowcaseImageError(event, activeCategory.id)}
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             {/* Cinematic Lighting Vignette */}
@@ -361,6 +378,9 @@ export default function CarShowcase() {
                     <img
                       src={angle.image}
                       alt={angle.label}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(event) => handleShowcaseImageError(event, activeCategory.id)}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-night-950/20" />
