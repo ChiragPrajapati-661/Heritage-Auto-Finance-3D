@@ -94,7 +94,7 @@ export default function ServicePage({ service, heroImage, intro, steps, faqs }: 
           <SectionHeading
             eyebrow="Process"
             title="Four simple steps"
-            description="From first conversation to driving away — here is what to expect."
+            description="Here are the typical enquiry, document-review and next-step stages. Final decisions and timelines depend on the relevant lender or insurer."
           />
           <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
