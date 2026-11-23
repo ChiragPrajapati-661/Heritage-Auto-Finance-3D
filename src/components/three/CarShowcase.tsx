@@ -9,7 +9,7 @@
  *  - Real-time interactive EMI & finance dashboard
  *  - Direct links to service pages, WhatsApp, and application form
  */
-import { useState, useMemo } from 'react';
+import { useState, useMemo, type SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -216,7 +216,7 @@ const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
   refinance: pexels.refinance,
 };
 
-function handleShowcaseImageError(event: React.SyntheticEvent<HTMLImageElement>, categoryId: string) {
+function handleShowcaseImageError(event: SyntheticEvent<HTMLImageElement>, categoryId: string) {
   const image = event.currentTarget;
   image.onerror = null;
   image.src = CATEGORY_FALLBACK_IMAGES[categoryId] || pexels.newCar;
