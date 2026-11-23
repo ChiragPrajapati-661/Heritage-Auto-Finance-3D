@@ -8,7 +8,7 @@ const GOLD = '#d9b45a';
 
 function buildCarMaterials() {
   return {
-    body: new THREE.MeshStandardMaterial({ color: '#1a1030', metalness: 0.9, roughness: 0.22 }),
+    body: new THREE.MeshStandardMaterial({ color: '#34313b', metalness: 0.78, roughness: 0.28 }),
     gold: new THREE.MeshStandardMaterial({ color: GOLD, metalness: 0.95, roughness: 0.18 }),
     glass: new THREE.MeshPhysicalMaterial({
       color: '#0a0714',
@@ -25,16 +25,20 @@ function buildCarMaterials() {
 
 type Mats = ReturnType<typeof buildCarMaterials>;
 
-function Wheel({ x, material }: { x: number; material: THREE.MeshStandardMaterial }) {
+function Wheel({ x, z, material }: { x: number; z: number; material: THREE.MeshStandardMaterial }) {
   return (
-    <group position={[x, 0.34, x > 0 ? -1.15 : 1.15]} rotation={[0, 0, Math.PI / 2]}>
+    <group position={[x, 0.34, z]} rotation={[Math.PI / 2, 0, 0]}>
       <mesh castShadow>
-        <cylinderGeometry args={[0.34, 0.34, 0.24, 24]} />
+        <cylinderGeometry args={[0.36, 0.36, 0.24, 32]} />
         <primitive object={material} attach="material" />
       </mesh>
-      <mesh position={[0, x > 0 ? -0.13 : 0.13, 0]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.18, 0.18, 0.04, 20]} />
-        <meshStandardMaterial color={GOLD} metalness={0.9} roughness={0.25} />
+      <mesh position={[0, 0.125, 0]}>
+        <cylinderGeometry args={[0.2, 0.2, 0.035, 24]} />
+        <meshStandardMaterial color={GOLD} metalness={0.9} roughness={0.22} />
+      </mesh>
+      <mesh position={[0, -0.125, 0]}>
+        <cylinderGeometry args={[0.2, 0.2, 0.035, 24]} />
+        <meshStandardMaterial color={GOLD} metalness={0.9} roughness={0.22} />
       </mesh>
     </group>
   );
@@ -83,8 +87,10 @@ function CarModel({ m }: { m: Mats }) {
         <boxGeometry args={[0.05, 0.1, 0.4]} />
         <primitive object={m.tail} attach="material" />
       </mesh>
-      <Wheel x={1.45} material={m.rubber} />
-      <Wheel x={-1.45} material={m.rubber} />
+      <Wheel x={1.45} z={0.98} material={m.rubber} />
+      <Wheel x={1.45} z={-0.98} material={m.rubber} />
+      <Wheel x={-1.45} z={0.98} material={m.rubber} />
+      <Wheel x={-1.45} z={-0.98} material={m.rubber} />
     </group>
   );
 }
