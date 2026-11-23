@@ -61,7 +61,7 @@ export default function Contact() {
         <SectionHeading
           eyebrow="Contact Us"
           title="Let's talk about your vehicle"
-          description="Choose whichever channel suits you — every route reaches the same team."
+          description="Choose a contact channel or share your details through the enquiry form."
         />
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {channels.map(({ icon: Icon, label, value, href, note }) => (
