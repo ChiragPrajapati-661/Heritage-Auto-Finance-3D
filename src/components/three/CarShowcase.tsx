@@ -504,14 +504,14 @@ export default function CarShowcase() {
           </div>
 
           {/* Key Advantages */}
-          <div className="flex items-center justify-between rounded-lg bg-white/[0.02] p-2.5 text-xs text-neutral-300">
-            <span className="flex items-center gap-1.5">
-              <Gauge className="h-4 w-4 text-gold-400" />
-              {activeCategory.fundingHighlight}
+          <div className="flex flex-col gap-2 rounded-lg bg-white/[0.02] p-3 text-xs text-neutral-300 sm:flex-row sm:items-start sm:justify-between">
+            <span className="flex min-w-0 items-start gap-1.5 leading-relaxed sm:flex-1">
+              <Gauge className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" />
+              <span>{activeCategory.fundingHighlight}</span>
             </span>
-            <span className="flex items-center gap-1.5 text-neutral-400">
-              <Clock className="h-3.5 w-3.5 text-emerald-400" />
-              {activeCategory.approvalSpeed}
+            <span className="flex min-w-0 items-start gap-1.5 leading-relaxed text-neutral-400 sm:flex-1">
+              <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+              <span>{activeCategory.approvalSpeed}</span>
             </span>
           </div>
 
@@ -539,7 +539,7 @@ export default function CarShowcase() {
               WhatsApp Consultation
             </a>
 
-            <div className="flex items-center justify-between px-1 pt-1 text-[0.7rem] text-neutral-400">
+            <div className="flex flex-col items-start gap-2 px-1 pt-1 text-[0.7rem] text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
               <Link
                 to={activeCategory.path}
                 className="flex items-center gap-1 text-gold-400 underline-offset-4 hover:underline"
