@@ -24,7 +24,7 @@ export default function ContactDock() {
         id="floating-contact-options"
         aria-hidden={!open}
         className={`glass-card flex flex-col overflow-hidden transition-all duration-300 ${
-          open ? 'max-h-40 w-64 opacity-100' : 'max-h-0 w-64 border-transparent opacity-0'
+          open ? 'visible max-h-40 w-64 opacity-100' : 'invisible max-h-0 w-64 border-transparent opacity-0'
         }`}
       >
         <a
