@@ -66,17 +66,21 @@ export default function FinanceEnquiryForm({
     setSaveFailed(false);
 
     let stored = false;
-    if (supabase) {
-      const { error } = await supabase.from('enquiries').insert({
-        name: form.name.trim(),
-        mobile: form.mobile.replace(/\s|-/g, ''),
-        city: form.city.trim(),
-        vehicle_type: form.vehicleType,
-        enquiry_type: form.enquiryType,
-        message: form.message.trim() || null,
-      });
-      stored = !error;
-      if (error) console.error('Failed to save enquiry:', error.message);
+    try {
+      if (supabase) {
+        const { error } = await supabase.from('enquiries').insert({
+          name: form.name.trim(),
+          mobile: form.mobile.replace(/\s|-/g, ''),
+          city: form.city.trim(),
+          vehicle_type: form.vehicleType,
+          enquiry_type: form.enquiryType,
+          message: form.message.trim() || null,
+        });
+        stored = !error;
+        if (error) console.error('Failed to save enquiry:', error.message);
+      }
+    } catch (error) {
+      console.error('Unexpected enquiry submission error:', error);
     }
 
     setStatus('success');
@@ -91,10 +95,11 @@ export default function FinanceEnquiryForm({
     return (
       <div className="glass-card p-8 text-center sm:p-10" role="status">
         <CheckCircle2 className="mx-auto h-14 w-14 text-emerald-400" aria-hidden="true" />
-        <h3 className="mt-4 font-display text-2xl font-semibold text-white">Enquiry received</h3>
+        <h3 className="mt-4 font-display text-2xl font-semibold text-white">{saveFailed ? 'Complete your enquiry on WhatsApp' : 'Enquiry received'}</h3>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-neutral-400">
-          Thank you, {form.name.split(' ')[0]}. Our team will contact you on {form.mobile} during business hours
-          {saveFailed ? '. Your details could not be stored automatically — please also reach us on WhatsApp or phone below.' : '.'}
+          {saveFailed
+            ? 'Your details could not be submitted to our enquiry system. Please continue on WhatsApp so our team receives your request.'
+            : `Thank you, ${form.name.split(' ')[0]}. Your enquiry has been saved. Our team will contact you on ${form.mobile} during business hours.`}
         </p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href={waMessage} target="_blank" rel="noopener noreferrer" className="btn-gold">
