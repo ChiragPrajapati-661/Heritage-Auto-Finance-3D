@@ -41,8 +41,8 @@ export default function About() {
             Vehicle finance, rooted in {site.location.city}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-neutral-300 sm:text-lg">
-            {site.name} helps individuals and businesses across Gujarat arrange the right finance for the
-            vehicles they rely on — with clear advice, careful paperwork and no shortcuts.
+            {site.name} helps individuals and businesses across Gujarat explore vehicle finance and insurance assistance for
+            the vehicles they rely on, with clear information about the enquiry process and lender requirements.
           </p>
         </div>
       </section>
