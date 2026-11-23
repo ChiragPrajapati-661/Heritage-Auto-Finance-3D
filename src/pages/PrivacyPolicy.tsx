@@ -27,7 +27,7 @@ const sections = [
   {
     title: '4. Data Storage and Security',
     body: [
-      'Enquiries submitted through this website are stored in a secured database accessible only to authorised personnel. We apply reasonable technical and organisational safeguards to protect your information.',
+      'When the website enquiry database is configured and available, submitted enquiries are stored in a database with access restricted through the configured service permissions. If an enquiry cannot be saved, the website will ask you to continue through WhatsApp so the request can reach us. We apply reasonable technical and organisational safeguards to protect information held in our systems.',
       'No method of transmission over the internet is completely secure, and we cannot guarantee absolute security of information you submit online.',
     ],
   },
