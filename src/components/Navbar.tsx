@@ -41,11 +41,13 @@ export default function Navbar() {
     >
       <div className="container-site flex items-center justify-between gap-4 py-4">
         <Link to="/" className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 rounded" aria-label={`${site.name} home`}>
-          <LogoMark />
-          <span className="leading-tight">
-            <span className="block font-display text-lg font-semibold tracking-wide text-white">HERITAGE</span>
-            <span className="block text-[0.6rem] font-medium uppercase tracking-[0.35em] text-gold-500">Auto Finance</span>
-          </span>
+          <LogoMark imgClassName="h-10 sm:h-11 w-auto max-w-[190px]" />
+          {!site.logoSrc && (
+            <span className="leading-tight">
+              <span className="block font-display text-lg font-semibold tracking-wide text-white">HERITAGE</span>
+              <span className="block text-[0.6rem] font-medium uppercase tracking-[0.35em] text-gold-500">Auto Finance</span>
+            </span>
+          )}
         </Link>
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {navigation.slice(0, 4).map((item) => (

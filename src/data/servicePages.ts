@@ -20,18 +20,18 @@ export const servicePageData: Record<string, ServicePageData> = {
     ],
     steps: [
       { title: 'Share the model', text: 'Tell us which car (and variant) you have in mind, along with your city and budget.' },
-      { title: 'Eligibility & options', text: 'We check indicative eligibility and present loan options with realistic rates and tenures.' },
+      { title: 'Eligibility & options', text: 'We help compare available lender options; final rates and tenure depend on the bank/NBFC assessment.' },
       { title: 'Documents & approval', text: 'Complete a short document checklist; we submit to the lender and follow up on approval.' },
       { title: 'Disbursal & delivery', text: 'Funds go directly to the dealer and your new car is ready for delivery.' },
     ],
     faqs: [
       {
         q: 'How much of the car price can be financed?',
-        a: 'Many lenders fund up to 90% of the on-road price for salaried and self-employed applicants, subject to eligibility. We will confirm indicative figures for your profile before you commit.',
+        a: 'The fundable amount varies by lender policy, vehicle, applicant profile and credit assessment. We can help you explore indicative options; the bank/NBFC confirms the final amount.',
       },
       {
         q: 'How long does approval take?',
-        a: 'With complete documents, approval is often within 24–72 working hours. Timelines vary by lender and profile.',
+        a: 'Processing and decision timelines vary by lender, applicant profile and document verification. The lender communicates the final decision.',
       },
       {
         q: 'Can I prepay the loan later?',
@@ -48,7 +48,7 @@ export const servicePageData: Record<string, ServicePageData> = {
     path: '/services/used-car-finance',
     heroImage: pexels.usedCar,
     intro: [
-      'A pre-owned car is often the smartest buy on the road — if the finance is handled properly. We arrange used car funding with fair valuations, clear rates and verification that protects you from paperwork problems later.',
+      'A pre-owned car is often the smartest buy on the road — if the finance is handled properly. We help explore used-car finance options, support valuation discussions and coordinate documentation with the selected lender.',
       'We support purchases from dealers and individual sellers across most makes and models, including cars up to ten years old, subject to lender policy.',
     ],
     steps: [
@@ -72,7 +72,7 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'Are used car interest rates higher than new car rates?',
-        a: 'Usually slightly higher, since the vehicle age adds risk. A good valuation and clean documents keep the rate competitive.',
+        a: 'Rates can differ from new-car finance and are set by each lender after considering vehicle age, condition, applicant profile and credit assessment.',
       },
     ],
   },
@@ -130,11 +130,11 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'I am a first-time commercial vehicle buyer. Can I get finance?',
-        a: 'Yes. Several lenders have programmes for first-time CV buyers. Income proof and a clear vehicle plan matter most; we guide you through both.',
+        a: 'Some lenders may consider first-time commercial vehicle buyers. Eligibility and terms depend on lender policy, income assessment and the vehicle/business profile.',
       },
       {
         q: 'What margin money is required?',
-        a: 'Typically 10–25% of the vehicle cost depending on the vehicle and profile. We confirm indicative figures before applying.',
+        a: 'Margin contribution varies by lender, vehicle, applicant profile and assessment. The selected lender confirms the required amount.',
       },
       {
         q: 'Can income be shown through bank statements only?',

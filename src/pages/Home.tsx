@@ -75,12 +75,12 @@ export default function Home() {
       <section className="relative container-site scroll-mt-20 py-20 sm:py-28" aria-label="Vehicle showcase">
         <GoldTrails />
         <SectionHeading
-          eyebrow="Showroom"
-          title="Take a closer look"
-          description="Drag the car to rotate it a full 360 degrees — a small taste of the attention every enquiry gets."
+          eyebrow="Showroom Collection"
+          title="Experience Dealership Luxury"
+          description="Explore our curated vehicle finance categories, view multi-angle studio perspectives, and calculate your custom monthly instalment."
         />
-        <div className="relative mx-auto mt-10 max-w-3xl">
-          <Suspense fallback={<div className="h-[320px] animate-pulse rounded-2xl bg-white/[0.03] sm:h-[420px]" aria-hidden="true" />}>
+        <div className="relative mx-auto mt-10 max-w-5xl">
+          <Suspense fallback={<div className="h-[480px] animate-pulse rounded-2xl bg-white/[0.03]" aria-hidden="true" />}>
             <CarShowcase />
           </Suspense>
         </div>

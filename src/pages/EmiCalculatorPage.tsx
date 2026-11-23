@@ -46,7 +46,7 @@ export default function EmiCalculatorPage() {
         <SectionHeading
           eyebrow="EMI Calculator"
           title="Know your monthly instalment"
-          description="Move the sliders to model your loan. Results update instantly — no sign-up, no charges."
+          description="Adjust the amount, an illustrative interest-rate assumption and tenure to model a possible monthly instalment. No result is a loan offer or approval."
         />
         <div className="mt-12">
           <EmiCalculator />
@@ -57,7 +57,7 @@ export default function EmiCalculatorPage() {
         <SectionHeading
           eyebrow="Compare"
           title="Compare finance options"
-          description="Pick a loan amount and see indicative monthly instalments across our finance types side by side."
+          description="Compare example EMI scenarios using clearly labelled planning assumptions. Actual terms are set by the selected bank/NBFC."
         />
         <div className="mt-12">
           <FinanceComparison />

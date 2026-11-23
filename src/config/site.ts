@@ -27,9 +27,8 @@ export const site = {
     facebook: 'https://www.facebook.com/share/1F1PD2Czew/',
     instagram: 'https://www.instagram.com/heritageautofinance?gwpx=N3pjczhjbXE1dW01',
   },
-  // Drop the original logo file at public/brand/logo.png and it is picked up
-  // automatically (navbar, footer, loading screen). Null = use the monogram mark.
-  logoSrc: null as string | null,
+  // Official Heritage logo: public/brand/heritage-logo.webp
+  logoSrc: '/brand/heritage-logo.webp' as string | null,
 } as const;
 
 export const whatsappLink = (message: string): string =>
@@ -59,13 +58,13 @@ export const services: Service[] = [
     shortTitle: 'New Car',
     tagline: 'Own the newest model on the lot',
     description:
-      'Finance a brand-new car with competitive interest rates, flexible tenures and quick approvals from leading lenders.',
+      'We help compare vehicle finance options from banks and NBFCs, with terms subject to lender policy and applicant assessment.',
     icon: 'Car',
     highlights: [
-      'Up to 90% on-road funding',
+      'Funding options subject to lender policy',
       'Tenures from 12 to 84 months',
       'Minimal documentation',
-      'Same-week disbursement',
+      'Disbursal timeline determined by the lender',
     ],
   },
   {
@@ -80,8 +79,8 @@ export const services: Service[] = [
     highlights: [
       'Cars up to 10 years old',
       'Fair market valuation support',
-      'Competitive used-car rates',
-      'Quick paper verification',
+      'Compare available lender options',
+      'Document support and application coordination',
     ],
   },
   {
@@ -112,7 +111,7 @@ export const services: Service[] = [
     highlights: [
       'LCVs, HCVs, tippers & tractors',
       'Structured for business cash flows',
-      'Funding up to 100% of the chassis',
+      'Funding structure subject to lender assessment',
       'Fleet-operator friendly terms',
     ],
   },

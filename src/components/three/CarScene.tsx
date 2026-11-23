@@ -1,7 +1,21 @@
+/**
+ * CarScene.tsx — Full-screen 3D showroom hero background canvas.
+ * Showcases the procedural luxury sports car with showroom lighting,
+ * smooth mouse parallax, scroll-driven rotation, and gold atmosphere particles.
+ */
 import { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { ContactShadows, Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
+import {
+  SportsCarModel,
+} from './SportsCarModel';
+import {
+  useCarMaterials,
+  CAR_GOLD,
+} from './carMaterials';
+
+export { SportsCarModel as PremiumCar };
 
 interface SceneRefs {
   pointer: React.MutableRefObject<{ x: number; y: number }>;
@@ -9,218 +23,95 @@ interface SceneRefs {
   reducedMotion: boolean;
 }
 
-const GOLD = '#d9b45a';
+/* ─── Floating Gold Atmosphere Particles ─────────────────── */
+function ShowroomAtmosphere({ reducedMotion }: { reducedMotion: boolean }) {
+  const pointsRef = useRef<THREE.Points>(null);
+  const particleCount = 140;
 
-function useCarMaterials() {
-  return useMemo(() => {
-    const body = new THREE.MeshStandardMaterial({ color: '#1a1030', metalness: 0.9, roughness: 0.22 });
-    const gold = new THREE.MeshStandardMaterial({ color: GOLD, metalness: 0.95, roughness: 0.18 });
-    const glass = new THREE.MeshPhysicalMaterial({
-      color: '#0a0714',
-      metalness: 0.3,
-      roughness: 0.04,
-      transparent: true,
-      opacity: 0.85,
-    });
-    const rubber = new THREE.MeshStandardMaterial({ color: '#0c0a10', roughness: 0.9 });
-    const headlight = new THREE.MeshStandardMaterial({
-      color: '#fff6dd',
-      emissive: '#ffe9b0',
-      emissiveIntensity: 2.2,
-    });
-    const tail = new THREE.MeshStandardMaterial({
-      color: '#ff4444',
-      emissive: '#cc1111',
-      emissiveIntensity: 1.2,
-    });
-    return { body, gold, glass, rubber, headlight, tail };
-  }, []);
-}
-
-function Wheel({ x, material }: { x: number; material: THREE.MeshStandardMaterial }) {
-  return (
-    <group position={[x, 0.34, x > 0 ? -1.15 : 1.15]} rotation={[0, 0, Math.PI / 2]}>
-      <mesh castShadow>
-        <cylinderGeometry args={[0.34, 0.34, 0.24, 24]} />
-        <primitive object={material} attach="material" />
-      </mesh>
-      <mesh position={[0, x > 0 ? -0.13 : 0.13, 0]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.18, 0.18, 0.04, 20]} />
-        <meshStandardMaterial color={GOLD} metalness={0.9} roughness={0.25} />
-      </mesh>
-    </group>
-  );
-}
-
-function LuxuryCar({ pointer, scroll, reducedMotion }: SceneRefs) {
-  const group = useRef<THREE.Group>(null);
-  const headlightL = useRef<THREE.PointLight>(null);
-  const headlightR = useRef<THREE.PointLight>(null);
-  const m = useCarMaterials();
-
-  useFrame((state) => {
-    if (!group.current) return;
-    const t = state.clock.elapsedTime;
-    if (!reducedMotion) {
-      group.current.rotation.y += 0.0018;
-      group.current.position.y = Math.sin(t * 0.6) * 0.04;
-      group.current.rotation.z = Math.sin(t * 0.4) * 0.008;
-    }
-    // gentle pointer-driven turn
-    group.current.rotation.y += pointer.current.x * 0.004;
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, pointer.current.y * 0.12, 0.05);
-    // scroll-driven rotation (360° across the hero scroll)
-    group.current.rotation.y += scroll.current * 0.8;
-    // headlight beam breathing
-    if (!reducedMotion && headlightL.current && headlightR.current) {
-      const pulse = 1.6 + Math.sin(t * 2.2) * 0.5;
-      headlightL.current.intensity = pulse;
-      headlightR.current.intensity = pulse;
-    }
-  });
-
-  return (
-    <group ref={group} position={[0, -0.4, 0]} scale={1.35}>
-      <mesh castShadow position={[0, 0.62, 0]}>
-        <boxGeometry args={[4.4, 0.55, 1.9]} />
-        <primitive object={m.body} attach="material" />
-      </mesh>
-      <mesh castShadow position={[-0.25, 1.08, 0]}>
-        <boxGeometry args={[2.3, 0.52, 1.7]} />
-        <primitive object={m.glass} attach="material" />
-      </mesh>
-      <mesh castShadow position={[1.75, 0.78, 0]} rotation={[0, 0, -0.18]}>
-        <boxGeometry args={[1.2, 0.3, 1.8]} />
-        <primitive object={m.body} attach="material" />
-      </mesh>
-      <mesh castShadow position={[-2.0, 0.8, 0]} rotation={[0, 0, 0.2]}>
-        <boxGeometry args={[0.9, 0.3, 1.8]} />
-        <primitive object={m.body} attach="material" />
-      </mesh>
-      <mesh position={[0, 0.9, 0]}>
-        <boxGeometry args={[4.42, 0.05, 1.92]} />
-        <primitive object={m.gold} attach="material" />
-      </mesh>
-      <mesh position={[2.2, 0.6, 0]}>
-        <boxGeometry args={[0.06, 0.28, 1.3]} />
-        <primitive object={m.gold} attach="material" />
-      </mesh>
-      {/* Headlights with live glow lights */}
-      <mesh position={[2.21, 0.78, 0.6]}>
-        <boxGeometry args={[0.05, 0.12, 0.42]} />
-        <primitive object={m.headlight} attach="material" />
-      </mesh>
-      <mesh position={[2.21, 0.78, -0.6]}>
-        <boxGeometry args={[0.05, 0.12, 0.42]} />
-        <primitive object={m.headlight} attach="material" />
-      </mesh>
-      <pointLight ref={headlightL} position={[2.6, 0.78, 0.6]} distance={6} color="#ffe9b0" intensity={1.6} />
-      <pointLight ref={headlightR} position={[2.6, 0.78, -0.6]} distance={6} color="#ffe9b0" intensity={1.6} />
-      {/* Tail lights */}
-      <mesh position={[-2.21, 0.78, 0.6]}>
-        <boxGeometry args={[0.05, 0.1, 0.4]} />
-        <primitive object={m.tail} attach="material" />
-      </mesh>
-      <mesh position={[-2.21, 0.78, -0.6]}>
-        <boxGeometry args={[0.05, 0.1, 0.4]} />
-        <primitive object={m.tail} attach="material" />
-      </mesh>
-      <Wheel x={1.45} material={m.rubber} />
-      <Wheel x={-1.45} material={m.rubber} />
-    </group>
-  );
-}
-
-function GoldParticles({ reducedMotion }: { reducedMotion: boolean }) {
-  const points = useRef<THREE.Points>(null);
   const positions = useMemo(() => {
-    const arr = new Float32Array(180 * 3);
-    for (let i = 0; i < 180; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 14;
-      arr[i * 3 + 1] = Math.random() * 7 - 0.5;
+    const arr = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
+      arr[i * 3]     = (Math.random() - 0.5) * 15;
+      arr[i * 3 + 1] = Math.random() * 6 - 0.2;
       arr[i * 3 + 2] = (Math.random() - 0.5) * 10;
     }
     return arr;
-  }, []);
+  }, [particleCount]);
 
-  useFrame((state) => {
-    if (!points.current || reducedMotion) return;
-    const t = state.clock.elapsedTime;
-    points.current.rotation.y = t * 0.02;
-    points.current.position.y = Math.sin(t * 0.25) * 0.3;
+  useFrame(({ clock }) => {
+    if (!pointsRef.current || reducedMotion) return;
+    const t = clock.elapsedTime;
+    pointsRef.current.rotation.y = t * 0.012;
+    pointsRef.current.position.y = Math.sin(t * 0.25) * 0.18;
   });
 
   return (
-    <points ref={points}>
+    <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={180} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" count={particleCount} array={positions} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial
-        color={GOLD}
-        size={0.045}
+        color={CAR_GOLD}
+        size={0.042}
         sizeAttenuation
         transparent
-        opacity={0.55}
+        opacity={0.45}
         depthWrite={false}
       />
     </points>
   );
 }
 
-export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) {
-  const pointer = useRef({ x: 0, y: 0 });
-  const scroll = useRef(0);
+/* ─── Hero Car Group (Parallax, Scroll, and Headlight Glow) ─ */
+function HeroCarRig({ pointer, scroll, reducedMotion }: SceneRefs) {
+  const group = useRef<THREE.Group>(null);
+  const headlightL = useRef<THREE.PointLight>(null);
+  const headlightR = useRef<THREE.PointLight>(null);
+  const m = useCarMaterials();
 
-  useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
-    };
-    const onScroll = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      scroll.current = scrollable > 0 ? window.scrollY / scrollable : 0;
-    };
-    window.addEventListener('pointermove', onMove, { passive: true });
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => {
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, []);
+  useFrame(({ clock }) => {
+    if (!group.current) return;
+    const t = clock.elapsedTime;
+
+    if (!reducedMotion) {
+      // Gentle cinematic breathing idle
+      group.current.rotation.y += 0.0016;
+      group.current.position.y  = Math.sin(t * 0.55) * 0.028;
+      group.current.rotation.z  = Math.sin(t * 0.38) * 0.005;
+    }
+
+    // Pointer-driven parallax yaw & pitch
+    group.current.rotation.y += pointer.current.x * 0.0028;
+    group.current.rotation.x  = THREE.MathUtils.lerp(
+      group.current.rotation.x,
+      pointer.current.y * 0.07,
+      0.04
+    );
+
+    // Scroll-driven rotation (360° across page scroll)
+    group.current.rotation.y += scroll.current * 0.55;
+
+    // Headlight beam pulsing glow
+    if (!reducedMotion && headlightL.current && headlightR.current) {
+      const pulse = 2.2 + Math.sin(t * 2.2) * 0.45;
+      headlightL.current.intensity = pulse;
+      headlightR.current.intensity = pulse;
+    }
+  });
 
   return (
-    <Canvas
-      dpr={[1, 1.35]}
-      camera={{ position: [5.2, 2.2, 5.2], fov: 42 }}
-      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-    >
-      {/* Showroom lighting rig */}
-      <ambientLight intensity={0.35} />
-      <spotLight
-        position={[6, 8, 4]}
-        angle={0.5}
-        penumbra={0.8}
-        intensity={140}
-        color="#f5e3a8"
-        castShadow
-        shadow-mapSize={[1024, 1024]}
-      />
-      <spotLight position={[-7, 5, -5]} angle={0.6} penumbra={1} intensity={80} color="#6d30b4" />
-      <pointLight position={[0, 2, 6]} intensity={12} color={GOLD} />
-      {/* Mouse-responsive camera */}
-      <CameraRig pointer={pointer} reducedMotion={reducedMotion} />
-      <Float speed={reducedMotion ? 0 : 1.2} rotationIntensity={0} floatIntensity={reducedMotion ? 0 : 0.35}>
-        <LuxuryCar pointer={pointer} scroll={scroll} reducedMotion={reducedMotion} />
-      </Float>
-      <GoldParticles reducedMotion={reducedMotion} />
-      <ContactShadows position={[0, -0.75, 0]} opacity={0.65} scale={12} blur={2.6} far={4} color="#000000" />
-      <Environment preset="city" />
-    </Canvas>
+    // Scale 1.35 brings the sports car forward so it has commanding presence
+    <group ref={group} scale={1.35}>
+      <SportsCarModel m={m} />
+      {/* Dynamic forward headlight projector beams */}
+      <pointLight ref={headlightL} position={[3.5, 0.45, 0.65]} distance={8} color="#ffeec0" intensity={2.2} />
+      <pointLight ref={headlightR} position={[3.5, 0.45, -0.65]} distance={8} color="#ffeec0" intensity={2.2} />
+    </group>
   );
 }
 
-function CameraRig({
+/* ─── Smooth Parallax Camera Rig ─────────────────────────── */
+function CameraController({
   pointer,
   reducedMotion,
 }: {
@@ -229,11 +120,103 @@ function CameraRig({
 }) {
   useFrame((state) => {
     if (reducedMotion) return;
-    const px = pointer.current.x;
-    const py = pointer.current.y;
-    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, 5.2 + px * 0.6, 0.04);
-    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, 2.2 - py * 0.4, 0.04);
-    state.camera.lookAt(0, 0.4, 0);
+    const { x, y } = pointer.current;
+    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, 5.2 + x * 0.5, 0.038);
+    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, 2.2 - y * 0.3, 0.038);
+    state.camera.lookAt(0, 0.25, 0);
   });
   return null;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EXPORT: CarScene
+   ═══════════════════════════════════════════════════════════ */
+export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) {
+  const pointer = useRef({ x: 0, y: 0 });
+  const scroll  = useRef(0);
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+    const onScroll = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      scroll.current = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    };
+
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
+  return (
+    <Canvas
+      dpr={[1, 1.5]}
+      camera={{ position: [5.2, 2.2, 5.2], fov: 40 }}
+      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+    >
+      {/* ── Studio Showroom Lighting Rig ── */}
+      <ambientLight intensity={0.28} color="#9a8db4" />
+
+      {/* Main warm key spot (highlights metallic hood & roof curvature) */}
+      <spotLight
+        position={[6.5, 9.5, 4.5]}
+        angle={0.42}
+        penumbra={0.85}
+        intensity={180}
+        color="#faebd0"
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+        shadow-bias={-0.0003}
+      />
+
+      {/* Heritage signature purple fill spot (from rear-left) */}
+      <spotLight
+        position={[-7.5, 5.5, -5.0]}
+        angle={0.58}
+        penumbra={1}
+        intensity={95}
+        color="#6226a4"
+      />
+
+      {/* Rear rim light (cuts out the fastback curve & rear spoiler silhouette) */}
+      <spotLight
+        position={[0, 6.5, -6.0]}
+        angle={0.65}
+        penumbra={1}
+        intensity={65}
+        color="#c88c24"
+      />
+
+      {/* Subtle gold underbody floor bounce */}
+      <pointLight position={[0, -0.4, 0]} intensity={14} color={CAR_GOLD} distance={6} />
+
+      <CameraController pointer={pointer} reducedMotion={reducedMotion} />
+
+      <Float speed={reducedMotion ? 0 : 0.9} rotationIntensity={0} floatIntensity={reducedMotion ? 0 : 0.22}>
+        <HeroCarRig pointer={pointer} scroll={scroll} reducedMotion={reducedMotion} />
+      </Float>
+
+      <ShowroomAtmosphere reducedMotion={reducedMotion} />
+
+      {/* Realistic contact shadow beneath the tyres */}
+      <ContactShadows
+        position={[0, -0.86, 0]}
+        opacity={0.72}
+        scale={14}
+        blur={2.8}
+        far={4.5}
+        color="#000000"
+      />
+
+      {/* HDRI city environment reflection map */}
+      <Environment preset="city" />
+    </Canvas>
+  );
 }
