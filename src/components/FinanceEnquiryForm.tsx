@@ -57,7 +57,7 @@ export default function FinanceEnquiryForm({
     if (form.city.trim().length < 2) next.city = 'Please enter your city or town.';
     if (!form.vehicleType) next.vehicleType = 'Select your vehicle type.';
     if (!form.enquiryType) next.enquiryType = 'Select an enquiry type.';
-    if (!form.consent) next.consent = 'Please agree to be contacted about this enquiry.';
+    if (!form.consent) next.consent = 'Please provide consent to process this enquiry.';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
