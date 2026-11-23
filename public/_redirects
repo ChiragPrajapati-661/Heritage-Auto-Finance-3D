@@ -1,0 +1,3 @@
+/*  _redirects for Cloudflare Pages / Netlify-style SPA routing.
+    All paths fall back to index.html so client-side routes work. */
+/*    /index.html   200
