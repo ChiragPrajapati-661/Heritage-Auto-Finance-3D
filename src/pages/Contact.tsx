@@ -17,14 +17,14 @@ const channels = [
     label: 'WhatsApp',
     value: 'Message us instantly',
     href: whatsappLink(`Hello ${site.name}, I have a vehicle finance enquiry.`),
-    note: 'Typically the fastest response',
+    note: 'For questions and enquiry follow-up',
   },
   {
     icon: Mail,
     label: 'Email',
     value: site.email,
     href: `mailto:${site.email}`,
-    note: 'We reply within one business day',
+    note: 'For documents and detailed enquiries',
   },
   {
     icon: MapPin,
@@ -86,7 +86,7 @@ export default function Contact() {
           <SectionHeading
             eyebrow="Enquiry Form"
             title="Send your details"
-            description="Fill in the form and we will call you back during business hours. Fields marked with an asterisk are required."
+            description="Share your details and enquiry. Our team can review the information and contact you using your preferred channel. Fields marked with an asterisk are required."
             align="left"
           />
           <div className="glass-card mt-8 flex items-start gap-3 p-5">
