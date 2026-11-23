@@ -88,7 +88,13 @@ export default function FinanceEnquiryForm({
   };
 
   const waMessage = whatsappLink(
-    `Hello ${site.name}, my name is ${form.name || '—'} from ${form.city || '—'}. I am interested in ${form.enquiryType || 'vehicle finance'}. Vehicle type: ${form.vehicleType || '—'}.`
+    [
+      `Hello ${site.name}, my name is ${form.name || '—'} from ${form.city || '—'}.`,
+      `Mobile: ${form.mobile || '—'}.`,
+      `Enquiry: ${form.enquiryType || 'vehicle finance'}.`,
+      `Vehicle type: ${form.vehicleType || '—'}.`,
+      form.message.trim() ? `Message: ${form.message.trim()}` : '',
+    ].filter(Boolean).join(' ')
   );
 
   if (status === 'success') {
