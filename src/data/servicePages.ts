@@ -105,7 +105,7 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'What is a balance transfer?',
-        a: 'Moving an existing car loan to another lender offering a lower rate, which can reduce your EMI or total interest. We handle the transfer process.',
+        a: 'A balance transfer means moving an existing car loan to another lender, subject to approval. A lower rate does not automatically mean a lower overall cost; compare processing fees, foreclosure charges, tenure and total repayment before deciding.',
       },
     ],
   },
@@ -121,7 +121,7 @@ export const servicePageData: Record<string, ServicePageData> = {
       { title: 'Discuss the vehicle & use', text: 'The vehicle type, its intended use and your operating route or contract profile.' },
       { title: 'Review funding requirements', text: 'We help outline the vehicle cost, expected contribution and repayment needs for lender assessment.' },
       { title: 'Documents & submission', text: 'Business proof, income documents and vehicle quotation are compiled and filed.' },
-      { title: 'Approval & delivery', text: 'On sanction, the dealer is paid and the vehicle goes on the road.' },
+      { title: 'Lender decision & delivery', text: 'If the lender sanctions the application, it confirms the disbursal conditions and payment process. Vehicle delivery follows the lender, dealer and buyer requirements.' },
     ],
     faqs: [
       {
