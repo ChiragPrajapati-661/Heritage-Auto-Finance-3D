@@ -193,7 +193,7 @@ export default function FinanceEnquiryForm({
             className="mt-0.5 h-4 w-4 shrink-0 accent-gold-500"
           />
           <span>
-            I agree that Heritage Auto Finance may contact me about this enquiry. I have read the{' '}
+            I agree that Heritage Auto Finance may contact me about this enquiry and, where needed to process it, share relevant details with banks, NBFCs or insurers. I have read the{' '}
             <a href="/privacy-policy" className="text-gold-400 underline underline-offset-2" target="_blank" rel="noopener noreferrer">
               Privacy Policy
             </a>.
