@@ -41,7 +41,7 @@ export default function Hero3D() {
 
       <div className="container-site relative z-10 grid gap-10 pt-32 pb-24 lg:grid-cols-[1fr_420px] lg:items-center">
         <div className="animate-fade-up">
-          <p className="eyebrow">Mehsana, Gujarat — Vehicle Finance</p>
+          <p className="eyebrow">Mehsana, Gujarat — Serving Customers Across Gujarat</p>
           <h1 className="mt-4 max-w-3xl font-display text-5xl font-semibold uppercase leading-[1.08] text-white sm:text-6xl lg:text-7xl">
             Drive Your Dream.
             <span className="block bg-gold-gradient bg-clip-text text-transparent">Finance Your Future.</span>

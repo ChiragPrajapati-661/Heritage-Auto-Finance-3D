@@ -138,7 +138,7 @@ export default function CarShowcase() {
       >
         <Canvas
           shadows
-          dpr={[1, 1.75]}
+          dpr={[1, 1.35]}
           camera={{ position: [4.8, 1.9, 5.6], fov: 40 }}
           gl={{ antialias: true, alpha: true }}
         >

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageCircle, Phone, X } from 'lucide-react';
+import { MessageCircle, Phone } from 'lucide-react';
 import { site, whatsappLink } from '@/config/site';
 
 /**

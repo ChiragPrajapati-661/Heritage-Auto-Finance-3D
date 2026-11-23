@@ -10,7 +10,7 @@ const values = [
   },
   {
     title: 'Local understanding',
-    text: 'Based in Mehsana, we understand the vehicle needs of families, farmers, traders and transporters across North Gujarat.',
+    text: 'Based in Mehsana, we assist families, farmers, traders and transporters with vehicle finance enquiries from across Gujarat.',
   },
   {
     title: 'No false promises',
@@ -27,7 +27,7 @@ export default function About() {
     <>
       <SEO
         title="About Us"
-        description={`${site.name} is a vehicle finance assistance team based in Mehsana, Gujarat — new car, used car, refinance, commercial vehicle finance and insurance assistance.`}
+        description={`${site.name} is a vehicle finance assistance team based in Mehsana, helping customers across Gujarat explore new car, used car, refinance, commercial vehicle finance and insurance options.`}
         path="/about"
       />
       <section className="relative overflow-hidden pb-16 pt-36 sm:pt-44">
@@ -52,8 +52,7 @@ export default function About() {
           <SectionHeading eyebrow="Our Story" title="Built on referrals, not advertising" align="left" />
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-neutral-400 sm:text-base">
             <p>
-              Heritage Auto Finance started with a simple observation: people in Mehsana and the surrounding
-              districts were being sold vehicle loans — not advised on them. Rates, tenures and charges were
+              Heritage Auto Finance started with a simple observation: people in Mehsana and across Gujarat were being sold vehicle loans — not advised on them. Rates, tenures and charges were
               explained only after commitment.
             </p>
             <p>
@@ -83,7 +82,7 @@ export default function About() {
           <SectionHeading
             eyebrow="Visit or Call"
             title="Talk to the team"
-            description={site.hours}
+            description={`${site.hours} · Based in Mehsana, serving customers across Gujarat`}
           />
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a href={`tel:${site.phoneDial}`} className="btn-gold">Call {site.phoneDisplay}</a>

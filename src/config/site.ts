@@ -14,12 +14,13 @@ export const site = {
     country: 'India',
     // NOTE: Replace with the full, verified street address before going live.
     addressLine: 'Mehsana, Gujarat, India',
+    serviceArea: 'Across Gujarat',
   },
-  // NOTE: Replace +919XXXXXXXXX with the real WhatsApp number (country code, no +, no spaces).
+  // Confirmed business WhatsApp number (country code, no +, no spaces).
   whatsappNumber: '917600211085',
   phoneDisplay: '+91 76002 11085',
   phoneDial: '+917600211085',
-  // NOTE: Replace with the real business email.
+  // Business email shown on the website; verify inbox access before launch.
   email: 'info@heritageautofinance.in',
   hours: 'Mon – Sat, 9:30 AM – 7:00 PM',
   social: {

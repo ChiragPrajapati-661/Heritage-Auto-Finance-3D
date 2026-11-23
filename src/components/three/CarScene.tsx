@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { ContactShadows, Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -171,24 +171,29 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
   const pointer = useRef({ x: 0, y: 0 });
   const scroll = useRef(0);
 
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+    const onScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      scroll.current = scrollable > 0 ? window.scrollY / scrollable : 0;
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   return (
     <Canvas
-      shadows
-      dpr={[1, 1.75]}
+      dpr={[1, 1.35]}
       camera={{ position: [5.2, 2.2, 5.2], fov: 42 }}
-      gl={{ antialias: true, alpha: true }}
-      onCreated={(state) => {
-        const onMove = (e: PointerEvent) => {
-          pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-          pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
-        };
-        const onScroll = () => {
-          scroll.current = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
-        };
-        window.addEventListener('pointermove', onMove, { passive: true });
-        window.addEventListener('scroll', onScroll, { passive: true });
-        state.gl.domElement.addEventListener('webglcontextlost', () => state.invalidate());
-      }}
+      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
     >
       {/* Showroom lighting rig */}
       <ambientLight intensity={0.35} />

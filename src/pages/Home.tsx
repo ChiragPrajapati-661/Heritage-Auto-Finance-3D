@@ -56,7 +56,7 @@ export default function Home() {
     <>
       <SEO
         title={site.name}
-        description="Heritage Auto Finance, Mehsana — new car finance, used car finance, car refinance, commercial vehicle finance and insurance assistance. Enquire on WhatsApp or by phone."
+        description="Heritage Auto Finance, based in Mehsana and assisting customers across Gujarat with new car finance, used car finance, car refinance, commercial vehicle finance and insurance assistance."
         path="/"
         structuredData={{
           '@context': 'https://schema.org',
@@ -142,7 +142,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Why Choose Us"
             title="Advice first, finance second"
-            description="We are a Mehsana-based finance assistance team. Our job is to match you with suitable finance — honestly."
+            description="Based in Mehsana, we help customers across Gujarat explore suitable vehicle finance options with clear, honest guidance."
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {whyUs.map(({ icon: Icon, title, text }, i) => (
@@ -208,7 +208,7 @@ export default function Home() {
             />
             <span className="absolute -bottom-4 -right-4 hidden rounded-xl border border-gold-500/40 bg-night-900/90 px-5 py-3 backdrop-blur sm:block">
               <span className="block font-display text-2xl font-semibold text-gold-400">Mehsana</span>
-              <span className="block text-[0.65rem] uppercase tracking-[0.25em] text-neutral-400">Born & based</span>
+              <span className="block text-[0.65rem] uppercase tracking-[0.25em] text-neutral-400">Based in Mehsana · Serving Gujarat</span>
             </span>
           </div>
           <div>
@@ -266,7 +266,7 @@ export default function Home() {
               </a>
               <p className="flex items-center gap-2.5 px-1 text-sm text-neutral-400">
                 <MapPin className="h-4 w-4 shrink-0 text-gold-500" aria-hidden="true" />
-                Serving {site.location.city} and across {site.location.state}
+                Based in {site.location.city} · Serving customers across {site.location.state}
               </p>
             </div>
           </div>

@@ -31,7 +31,7 @@ const channels = [
     label: 'Location',
     value: site.location.addressLine,
     href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.name} ${site.location.addressLine}`)}`,
-    note: 'Serving Mehsana and nearby districts',
+    note: 'Based in Mehsana · Serving customers across Gujarat',
   },
   {
     icon: Facebook,
@@ -54,7 +54,7 @@ export default function Contact() {
     <>
       <SEO
         title="Contact Us"
-        description={`Contact ${site.name}, Mehsana — call, WhatsApp, email or submit a finance enquiry form for new car, used car, refinance, commercial vehicle finance and insurance assistance.`}
+        description={`Contact ${site.name}, based in Mehsana and serving customers across Gujarat — call, WhatsApp, email or submit a vehicle finance enquiry.`}
         path="/contact"
       />
       <section className="container-site pb-16 pt-36 sm:pt-44">
