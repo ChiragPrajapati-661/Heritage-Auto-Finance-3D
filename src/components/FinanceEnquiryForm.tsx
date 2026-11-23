@@ -10,6 +10,7 @@ interface FormState {
   vehicleType: string;
   enquiryType: string;
   message: string;
+  consent: boolean;
 }
 
 const initialState: FormState = {
@@ -19,6 +20,7 @@ const initialState: FormState = {
   vehicleType: '',
   enquiryType: '',
   message: '',
+  consent: false,
 };
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
@@ -55,6 +57,7 @@ export default function FinanceEnquiryForm({
     if (form.city.trim().length < 2) next.city = 'Please enter your city or town.';
     if (!form.vehicleType) next.vehicleType = 'Select your vehicle type.';
     if (!form.enquiryType) next.enquiryType = 'Select an enquiry type.';
+    if (!form.consent) next.consent = 'Please agree to be contacted about this enquiry.';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -135,17 +138,17 @@ export default function FinanceEnquiryForm({
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="f-name" className="field-label">Full name</label>
-          <input id="f-name" type="text" autoComplete="name" className="field-input" value={form.name} onChange={update('name')} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'f-name-err' : undefined} placeholder="Your name" />
+          <input id="f-name" type="text" autoComplete="name" className="field-input" value={form.name} onChange={update('name')} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'f-name-err' : undefined} placeholder="Your name" maxLength={100} />
           {errors.name && <p id="f-name-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.name}</p>}
         </div>
         <div>
           <label htmlFor="f-mobile" className="field-label">Mobile number</label>
-          <input id="f-mobile" type="tel" inputMode="numeric" autoComplete="tel" className="field-input" value={form.mobile} onChange={update('mobile')} aria-invalid={!!errors.mobile} aria-describedby={errors.mobile ? 'f-mobile-err' : undefined} placeholder="10-digit mobile" />
+          <input id="f-mobile" type="tel" inputMode="numeric" autoComplete="tel" className="field-input" value={form.mobile} onChange={update('mobile')} aria-invalid={!!errors.mobile} aria-describedby={errors.mobile ? 'f-mobile-err' : undefined} placeholder="10-digit mobile" maxLength={14} />
           {errors.mobile && <p id="f-mobile-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.mobile}</p>}
         </div>
         <div>
           <label htmlFor="f-city" className="field-label">City / Town</label>
-          <input id="f-city" type="text" autoComplete="address-level2" className="field-input" value={form.city} onChange={update('city')} aria-invalid={!!errors.city} aria-describedby={errors.city ? 'f-city-err' : undefined} placeholder="e.g. Mehsana" />
+          <input id="f-city" type="text" autoComplete="address-level2" className="field-input" value={form.city} onChange={update('city')} aria-invalid={!!errors.city} aria-describedby={errors.city ? 'f-city-err' : undefined} placeholder="e.g. Mehsana" maxLength={100} />
           {errors.city && <p id="f-city-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.city}</p>}
         </div>
         <div>
@@ -170,8 +173,32 @@ export default function FinanceEnquiryForm({
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="f-message" className="field-label">Message (optional)</label>
-          <textarea id="f-message" rows={3} className="field-input resize-none" value={form.message} onChange={update('message')} placeholder="Anything else we should know?" />
+          <textarea id="f-message" rows={3} className="field-input resize-none" value={form.message} onChange={update('message')} placeholder="Anything else we should know?" maxLength={1000} />
         </div>
+      </div>
+
+      <div className="mt-5">
+        <label htmlFor="f-consent" className="flex items-start gap-3 text-xs leading-relaxed text-neutral-400">
+          <input
+            id="f-consent"
+            type="checkbox"
+            checked={form.consent}
+            onChange={(event) => {
+              setForm((current) => ({ ...current, consent: event.target.checked }));
+              setErrors((current) => ({ ...current, consent: undefined }));
+            }}
+            aria-invalid={!!errors.consent}
+            aria-describedby={errors.consent ? 'f-consent-err' : undefined}
+            className="mt-0.5 h-4 w-4 shrink-0 accent-gold-500"
+          />
+          <span>
+            I agree that Heritage Auto Finance may contact me about this enquiry. I have read the{' '}
+            <a href="/privacy-policy" className="text-gold-400 underline underline-offset-2" target="_blank" rel="noopener noreferrer">
+              Privacy Policy
+            </a>.
+          </span>
+        </label>
+        {errors.consent && <p id="f-consent-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.consent}</p>}
       </div>
 
       {status === 'error' && (
@@ -192,8 +219,7 @@ export default function FinanceEnquiryForm({
         </a>
       </div>
       <p className="mt-4 text-xs leading-relaxed text-neutral-500">
-        By submitting, you agree to be contacted about your enquiry. We do not approve loans ourselves — final terms
-        depend on lender eligibility checks.
+        We do not approve loans ourselves. Final terms and approval decisions are made by the selected lender after its assessment.
       </p>
     </form>
   );
