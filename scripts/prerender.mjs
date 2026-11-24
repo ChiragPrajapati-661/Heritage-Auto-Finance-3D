@@ -17,13 +17,13 @@ const template = await readFile(join(dist, 'index.html'), 'utf8');
 // Keep the XML sitemap and the prerendered route list in sync.
 const sitemap = await readFile(join(root, 'public/sitemap.xml'), 'utf8');
 const robots = await readFile(join(root, 'public/robots.txt'), 'utf8');
-const sitemapUrls = [...sitemap.matchAll(/<loc>\\s*(.*?)\\s*<\\/loc>/g)].map((match) => match[1].trim());
+const sitemapUrls = [...sitemap.matchAll(/<loc>\s*(.*?)\s*<\/loc>/g)].map((match) => match[1].trim());
 const sitemapRoutes = sitemapUrls.map((value) => {
   const url = new URL(value);
   if (url.origin !== 'https://heritageautofinance.in' || url.search || url.hash) {
     throw new Error(`Unexpected sitemap URL: ${value}`);
   }
-  return url.pathname === '/' ? '/' : url.pathname.replace(/\\/$/, '');
+  return url.pathname === '/' ? '/' : url.pathname.replace(/\/$/, '');
 });
 const expectedRoutes = [...routes].sort();
 const actualRoutes = [...sitemapRoutes].sort();
