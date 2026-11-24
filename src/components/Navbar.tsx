@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Calculator } from 'lucide-react';
 import { site, navigation } from '@/config/site';
@@ -8,6 +8,8 @@ import SocialLinks from '@/components/SocialLinks';
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -23,11 +25,33 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!open) return;
+
+    const menu = mobileMenuRef.current;
+    const focusable = menu?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    focusable?.[0]?.focus();
+
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key !== 'Tab' || !focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [open]);
 
   useEffect(() => {
@@ -91,6 +115,7 @@ export default function Navbar() {
           </a>
         </nav>
         <button
+          ref={menuButtonRef}
           type="button"
           className="rounded-lg border border-white/10 p-2 text-neutral-200 transition-colors hover:border-gold-500/50 hover:text-gold-400 lg:hidden"
           onClick={() => setOpen((v) => !v)}
@@ -103,7 +128,9 @@ export default function Navbar() {
       </div>
 
       <div
+        ref={mobileMenuRef}
         id="mobile-primary-navigation"
+        aria-hidden={!open}
         className={`fixed inset-0 top-[76px] z-40 overflow-y-auto bg-night-950/97 backdrop-blur-xl transition-all duration-300 lg:hidden ${
           open ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
