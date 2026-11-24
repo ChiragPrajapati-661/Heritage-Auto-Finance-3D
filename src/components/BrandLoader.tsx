@@ -12,9 +12,9 @@ export default function BrandLoader() {
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const showMs = reduced ? 300 : 1400;
+    const showMs = reduced ? 200 : 650;
     const t1 = window.setTimeout(() => setDone(true), showMs);
-    const t2 = window.setTimeout(() => setHidden(true), showMs + 600);
+    const t2 = window.setTimeout(() => setHidden(true), showMs + 350);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
