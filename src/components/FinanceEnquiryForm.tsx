@@ -105,7 +105,7 @@ export default function FinanceEnquiryForm({
   if (status === 'success') {
     return (
       <div className="glass-card p-8 text-center sm:p-10" role="status">
-        <CheckCircle2 className="mx-auto h-14 w-14 text-emerald-400" aria-hidden="true" />
+        {saveFailed ? <AlertCircle className="mx-auto h-14 w-14 text-amber-400" aria-hidden="true" /> : <CheckCircle2 className="mx-auto h-14 w-14 text-emerald-400" aria-hidden="true" />}
         <h3 className="mt-4 font-display text-2xl font-semibold text-white">{saveFailed ? 'Complete your enquiry on WhatsApp' : 'Enquiry received'}</h3>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-neutral-400">
           {saveFailed
