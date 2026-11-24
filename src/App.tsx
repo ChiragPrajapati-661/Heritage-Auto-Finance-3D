@@ -19,7 +19,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/Heritage-Auto-Finance-3D">
+    <BrowserRouter>
       <BrandLoader />
       <ScrollToTop />
       <div className="flex min-h-screen flex-col">
