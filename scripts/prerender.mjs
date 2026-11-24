@@ -57,7 +57,7 @@ try {
     }
     if (!description.trim()) throw new Error(`Missing meta description for ${route}`);
 
-    const withRouteHead = template.replace(/<head>[\\s\\S]*?<\\/head>/i, () => `<head>${headHtml}</head>`);
+    const withRouteHead = template.replace(/<head>[\s\S]*?<\/head>/i, () => `<head>${headHtml}</head>`);
     if (withRouteHead === template) throw new Error('Could not replace the HTML document head');
     const output = withRouteHead.replace('<div id="root"></div>', `<div id="root">${rootHtml}</div>`);
     if (output === withRouteHead) throw new Error('Could not find root mount point in the Vite HTML template');
