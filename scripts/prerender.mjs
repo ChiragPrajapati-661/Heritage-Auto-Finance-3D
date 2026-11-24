@@ -48,7 +48,8 @@ try {
   if (!ready) throw new Error('Vite preview server did not become ready.');
   browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
   const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
-  page.on('pageerror', error => console.warn('Browser page error:', error.message));
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
 
   for (const route of routes) {
     const response = await page.goto(`http://127.0.0.1:4173${route}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -78,6 +79,18 @@ try {
       throw new Error(`Incorrect canonical URL for ${route}: expected ${expectedCanonical}, received ${canonicalUrl}`);
     }
     if (!description.trim()) throw new Error(`Missing meta description for ${route}`);
+    const routeMeta = await page.evaluate(() => ({
+      ogTitle: document.querySelector('meta[property="og:title"]')?.getAttribute('content') ?? '',
+      ogDescription: document.querySelector('meta[property="og:description"]')?.getAttribute('content') ?? '',
+      ogUrl: document.querySelector('meta[property="og:url"]')?.getAttribute('content') ?? '',
+      twitterTitle: document.querySelector('meta[name="twitter:title"]')?.getAttribute('content') ?? '',
+    }));
+    if (!routeMeta.ogTitle || !routeMeta.ogDescription || routeMeta.ogUrl !== expectedCanonical || !routeMeta.twitterTitle) {
+      throw new Error(`Incomplete social metadata for ${route}`);
+    }
+    if (pageErrors.length) {
+      throw new Error(`Browser runtime error on ${route}: ${pageErrors.join('; ')}`);
+    }
 
     const withRouteHead = template.replace(/<head>[\s\S]*?<\/head>/i, () => `<head>${headHtml}</head>`);
     if (withRouteHead === template) throw new Error('Could not replace the HTML document head');
