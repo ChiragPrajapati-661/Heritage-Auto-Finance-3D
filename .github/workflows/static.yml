@@ -33,6 +33,14 @@ jobs:
       - name: Build website
         run: npm run build
 
+      - name: Install temporary Playwright renderer
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install chromium
+
+      - name: Prerender public routes
+        run: npm run prerender
+
       - name: Configure SPA fallback for GitHub Pages
         run: cp dist/index.html dist/404.html
 
