@@ -37,3 +37,12 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Verify GitHub Pages output
+        run: |
+          test -s dist/index.html
+          test -s dist/robots.txt
+          test -s dist/sitemap.xml
+          cp dist/index.html dist/404.html
+          test -s dist/404.html
+          echo "Production entry point, SEO files, and SPA fallback are present."
