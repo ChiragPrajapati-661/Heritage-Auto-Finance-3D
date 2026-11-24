@@ -34,19 +34,39 @@ try {
     await page.locator('#root').waitFor({ state: 'attached', timeout: 10000 });
     await page.waitForFunction(() => {
       const root = document.querySelector('#root');
-      return !!root?.firstElementChild && document.title.includes('Heritage Auto Finance');
+      const canonical = document.querySelector('link[rel="canonical"]');
+      const description = document.querySelector('meta[name="description"]');
+      return !!root?.firstElementChild
+        && document.title.includes('Heritage Auto Finance')
+        && !!canonical?.getAttribute('href')
+        && !!description?.getAttribute('content');
     }, { timeout: 15000 });
     await delay(1100);
-    const title = await page.title();
-    const rootHtml = await page.locator('#root').innerHTML();
+
+    const { title, rootHtml, headHtml, canonicalUrl, description } = await page.evaluate(() => ({
+      title: document.title,
+      rootHtml: document.querySelector('#root')?.innerHTML ?? '',
+      headHtml: document.head.innerHTML,
+      canonicalUrl: document.querySelector('link[rel="canonical"]')?.getAttribute('href') ?? '',
+      description: document.querySelector('meta[name="description"]')?.getAttribute('content') ?? '',
+    }));
     if (!rootHtml || rootHtml.trim().length < 100) throw new Error(`Rendered content is unexpectedly empty: ${route}`);
-    const output = template.replace('<div id="root"></div>', `<div id="root">${rootHtml}</div>`);
-    if (output === template) throw new Error('Could not find root mount point in the Vite HTML template');
+    const expectedCanonical = `https://heritageautofinance.in${route}`;
+    if (canonicalUrl !== expectedCanonical) {
+      throw new Error(`Incorrect canonical URL for ${route}: expected ${expectedCanonical}, received ${canonicalUrl}`);
+    }
+    if (!description.trim()) throw new Error(`Missing meta description for ${route}`);
+
+    const withRouteHead = template.replace(/<head>[\\s\\S]*?<\\/head>/i, () => `<head>${headHtml}</head>`);
+    if (withRouteHead === template) throw new Error('Could not replace the HTML document head');
+    const output = withRouteHead.replace('<div id="root"></div>', `<div id="root">${rootHtml}</div>`);
+    if (output === withRouteHead) throw new Error('Could not find root mount point in the Vite HTML template');
+
     const relative = route === '/' ? '' : route.slice(1);
     const target = join(dist, relative, 'index.html');
     await mkdir(resolve(target, '..'), { recursive: true });
     await writeFile(target, output, 'utf8');
-    console.log(`Prerendered ${route} — ${title}`);
+    console.log(`Prerendered ${route} — ${title} — canonical verified`);
   }
 } finally {
   if (browser) await browser.close();
