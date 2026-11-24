@@ -275,7 +275,7 @@ export default function CarShowcase() {
           <div className="relative flex h-12 w-24 sm:h-14 sm:w-28 items-center justify-center rounded-xl border border-gold-500/30 bg-night-900/90 p-1.5 shadow-gold backdrop-blur-md">
             <span className="absolute -inset-0.5 rounded-xl bg-gold-gradient opacity-20 blur-sm animate-pulse-slow" />
             <img
-              src="/brand/heritage-logo.webp"
+              src={`${import.meta.env.BASE_URL}brand/heritage-logo.webp`}
               alt={`${site.name} official logo`}
               loading="eager"
               decoding="async"
