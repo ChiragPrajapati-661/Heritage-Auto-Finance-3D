@@ -51,7 +51,7 @@ export default function Hero3D() {
           </p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-300 sm:text-lg">
             New cars, pre-owned cars, refinancing and commercial vehicles — Heritage Auto Finance
-            connects you with suitable finance options, clearly explained and quickly processed.
+            helps you explore suitable finance options with clear information and guided next steps.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <Link to="/contact" className="btn-gold">
@@ -104,7 +104,7 @@ export default function Hero3D() {
 }
 
 const trustPoints = [
-  { icon: Gauge, label: 'Competitive rates' },
-  { icon: Clock3, label: 'Quick processing' },
-  { icon: ShieldCheck, label: 'Transparent terms' },
+  { icon: Gauge, label: 'Lender options' },
+  { icon: Clock3, label: 'Guided process' },
+  { icon: ShieldCheck, label: 'Clear information' },
 ];
