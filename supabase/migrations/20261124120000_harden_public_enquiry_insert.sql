@@ -3,7 +3,7 @@
 
 -- The public form needs INSERT only. Keep enquiry rows private to privileged business access.
 REVOKE SELECT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER
-ON TABLE public.enquiries FROM anon, authenticated;
+ON TABLE public.enquiries FROM PUBLIC, anon, authenticated;
 
 GRANT INSERT ON TABLE public.enquiries TO anon, authenticated;
 
