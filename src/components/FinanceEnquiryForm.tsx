@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { Send, CheckCircle2, AlertCircle, MessageCircle } from 'lucide-react';
 import { enquiryTypes, vehicleTypes, site, whatsappLink } from '@/config/site';
 import { supabase } from '@/lib/supabase';
@@ -194,9 +195,9 @@ export default function FinanceEnquiryForm({
           />
           <span>
             I agree that Heritage Auto Finance may contact me about this enquiry and, where needed to process it, share relevant details with banks, NBFCs or insurers. I have read the{' '}
-            <a href="/privacy-policy" className="text-gold-400 underline underline-offset-2" target="_blank" rel="noopener noreferrer">
+            <Link to="/privacy-policy" className="text-gold-400 underline underline-offset-2">
               Privacy Policy
-            </a>.
+            </Link>.
           </span>
         </label>
         {errors.consent && <p id="f-consent-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.consent}</p>}
