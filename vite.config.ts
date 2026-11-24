@@ -4,8 +4,8 @@ import { fileURLToPath, URL } from 'node:url';
 
 // Primary deployment uses the apex custom domain: https://heritageautofinance.in/
 export default defineConfig({
-  // Custom-domain deployment at https://heritageautofinance.in/
-  base: '/',
+  // Temporary project-site test while the apex domain is detached.
+  base: '/Heritage-Auto-Finance-3D/',
   plugins: [react()],
   resolve: {
     alias: {
