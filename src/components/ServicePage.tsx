@@ -13,8 +13,9 @@ interface ServicePageProps {
   faqs: { q: string; a: string }[];
 }
 
-function FaqJsonLd({ faqs, service }: { faqs: { q: string; a: string }[]; service: Service }) {
-  const data = {
+function ServiceStructuredData({ faqs, service }: { faqs: { q: string; a: string }[]; service: Service }) {
+  const pageUrl = `${site.domain}${service.path}`;
+  const faqData = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: faqs.map((f) => ({
@@ -23,9 +24,23 @@ function FaqJsonLd({ faqs, service }: { faqs: { q: string; a: string }[]; servic
       acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
     about: service.title,
-    url: `${site.domain}${service.path}`,
+    url: pageUrl,
   };
-  return <script type="application/ld+json">{JSON.stringify(data)}</script>;
+  const breadcrumbData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.domain },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${site.domain}/#services` },
+      { '@type': 'ListItem', position: 3, name: service.title, item: pageUrl },
+    ],
+  };
+  return (
+    <>
+      <script type="application/ld+json">{JSON.stringify(faqData)}</script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumbData)}</script>
+    </>
+  );
 }
 
 export default function ServicePage({ service, heroImage, intro, steps, faqs }: ServicePageProps) {
@@ -33,13 +48,22 @@ export default function ServicePage({ service, heroImage, intro, steps, faqs }: 
 
   return (
     <>
-      <FaqJsonLd faqs={faqs} service={service} />
+      <ServiceStructuredData faqs={faqs} service={service} />
       <section className="relative overflow-hidden pb-16 pt-36 sm:pt-44">
         <div className="absolute inset-0" aria-hidden="true">
           <img src={heroImage} alt="" className="h-full w-full object-cover opacity-25" />
           <div className="absolute inset-0 bg-gradient-to-b from-night-950/80 via-night-950/60 to-night-950" />
         </div>
         <div className="container-site relative">
+          <nav aria-label="Breadcrumb" className="mb-6 text-xs text-neutral-400">
+            <ol className="flex flex-wrap items-center gap-2">
+              <li><Link to="/" className="transition-colors hover:text-gold-400">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li><a href="/#services" className="transition-colors hover:text-gold-400">Services</a></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-gold-400">{service.title}</li>
+            </ol>
+          </nav>
           <p className="eyebrow animate-fade-up">{service.tagline}</p>
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold text-white sm:text-5xl lg:text-6xl animate-fade-up" style={{ animationDelay: '80ms' }}>
             {service.title}
