@@ -25,11 +25,10 @@ export const site = {
   hours: 'Mon – Sat, 9:30 AM – 7:00 PM',
   social: {
     facebook: 'https://www.facebook.com/share/1F1PD2Czew/',
-    instagram: 'https://www.instagram.com/heritageautofinance?gwpx=N3pjczhjbXE1dW01',
+    instagram: 'https://www.instagram.com/heritageautofinance/',
   },
-  // Drop the original logo file at public/brand/logo.png and it is picked up
-  // automatically (navbar, footer, loading screen). Null = use the monogram mark.
-  logoSrc: null as string | null,
+  // Official Heritage logo: public/brand/heritage-logo.webp
+  logoSrc: '/brand/heritage-logo.webp' as string | null,
 } as const;
 
 export const whatsappLink = (message: string): string =>
@@ -57,15 +56,15 @@ export const services: Service[] = [
     path: '/services/new-car-finance',
     title: 'New Car Finance',
     shortTitle: 'New Car',
-    tagline: 'Own the newest model on the lot',
+    tagline: 'Explore finance options for your next car',
     description:
-      'Finance a brand-new car with competitive interest rates, flexible tenures and quick approvals from leading lenders.',
+      'We help compare vehicle finance options from banks and NBFCs, with terms subject to lender policy and applicant assessment.',
     icon: 'Car',
     highlights: [
-      'Up to 90% on-road funding',
-      'Tenures from 12 to 84 months',
-      'Minimal documentation',
-      'Same-week disbursement',
+      'Funding options subject to lender policy',
+      'Tenure subject to lender assessment',
+      'Document guidance and application support',
+      'Disbursal timeline determined by the lender',
     ],
   },
   {
@@ -73,15 +72,15 @@ export const services: Service[] = [
     path: '/services/used-car-finance',
     title: 'Used Car Finance',
     shortTitle: 'Used Car',
-    tagline: 'Pre-owned cars, first-class finance',
+    tagline: 'Explore finance options for pre-owned cars',
     description:
-      'Buy a pre-owned car with confidence. We arrange funding for cars of most makes and models, with fair valuations and honest terms.',
+      'Explore pre-owned vehicle finance options with documentation guidance. Vehicle eligibility, valuation and terms are subject to lender assessment.',
     icon: 'CarFront',
     highlights: [
-      'Cars up to 10 years old',
-      'Fair market valuation support',
-      'Competitive used-car rates',
-      'Quick paper verification',
+      'Vehicle age criteria set by the lender',
+      'Vehicle valuation subject to lender process',
+      'Compare available lender options',
+      'Document support and application coordination',
     ],
   },
   {
@@ -89,14 +88,14 @@ export const services: Service[] = [
     path: '/services/car-refinance',
     title: 'Car Refinance',
     shortTitle: 'Refinance',
-    tagline: 'Unlock the value in your car',
+    tagline: 'Explore finance options against your existing car',
     description:
-      'Already own a car? Refinance it to release cash for business, education, travel or emergencies — while you keep driving it.',
+      'Explore refinance options against an existing vehicle. Eligibility, vehicle use, valuation and terms depend on lender assessment and the loan agreement.',
     icon: 'RefreshCcw',
     highlights: [
       'Funding against your existing car',
-      'Keep using your vehicle',
-      'Top-up on existing loans',
+      'Vehicle use subject to lender agreement',
+      'Existing-loan options subject to lender approval',
       'Balance transfer options',
     ],
   },
@@ -105,15 +104,15 @@ export const services: Service[] = [
     path: '/services/commercial-vehicle-finance',
     title: 'Commercial Vehicle Finance',
     shortTitle: 'Commercial',
-    tagline: 'Finance that moves your business',
+    tagline: 'Explore finance options for business vehicles',
     description:
-      'From light commercial vehicles to tippers and tractors, we finance the vehicles that keep Gujarat moving and your business growing.',
+      'Explore finance options for commercial vehicles and farm equipment, subject to vehicle eligibility, applicant profile and lender policy.',
     icon: 'Truck',
     highlights: [
       'LCVs, HCVs, tippers & tractors',
-      'Structured for business cash flows',
-      'Funding up to 100% of the chassis',
-      'Fleet-operator friendly terms',
+      'Repayment structure assessed by lender',
+      'Funding structure subject to lender assessment',
+      'Options subject to lender policy',
     ],
   },
   {
@@ -121,14 +120,14 @@ export const services: Service[] = [
     path: '/services/insurance-assistance',
     title: 'Insurance Assistance',
     shortTitle: 'Insurance',
-    tagline: 'Complete cover, zero confusion',
+    tagline: 'Understand your motor insurance options',
     description:
-      'Renew or transfer your motor insurance with guidance on the right cover — comprehensive, third-party, and add-ons explained plainly.',
+      'Get guidance on motor insurance options, policy renewals, transfers and add-ons. Coverage and issuance are subject to insurer terms.',
     icon: 'ShieldCheck',
     highlights: [
       'Comprehensive & third-party cover',
       'Renewals and transfers',
-      'Claim guidance',
+      'Claim-process guidance',
       'Add-on selection help',
     ],
   },

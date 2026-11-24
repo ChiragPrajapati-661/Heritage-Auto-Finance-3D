@@ -52,7 +52,7 @@ export default function SEO({ title, description, path = '/', type = 'website', 
     }
     org.textContent = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'AutoFinanceDealer',
+      '@type': 'FinancialService',
       name: site.legalName,
       url: site.domain,
       telephone: site.phoneDial,

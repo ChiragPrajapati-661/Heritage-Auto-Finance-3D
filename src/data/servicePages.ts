@@ -15,31 +15,31 @@ export const servicePageData: Record<string, ServicePageData> = {
     path: '/services/new-car-finance',
     heroImage: pexels.newCar,
     intro: [
-      'A new car is a milestone purchase, and the right finance makes it stress-free. Heritage Auto Finance helps you compare loan options from banks and NBFCs, understand the true on-road cost, and choose a tenure that keeps your monthly budget comfortable.',
-      'We assist with the full journey: eligibility assessment, document preparation, loan application and coordination with the dealer and lender up to disbursal. You keep choosing the car — we handle the finance around it.',
+      'Buying a new car is a major decision. Heritage Auto Finance helps you explore vehicle finance options, understand the estimated on-road cost and prepare for a conversation with a suitable lender. Final terms depend on the lender’s assessment.',
+      'We can guide you through enquiry details and document preparation, and help coordinate the application with the selected lender and dealer where applicable. The lender alone decides eligibility, sanction and disbursal.',
     ],
     steps: [
       { title: 'Share the model', text: 'Tell us which car (and variant) you have in mind, along with your city and budget.' },
-      { title: 'Eligibility & options', text: 'We check indicative eligibility and present loan options with realistic rates and tenures.' },
+      { title: 'Eligibility & options', text: 'We help compare available lender options; final rates and tenure depend on the bank/NBFC assessment.' },
       { title: 'Documents & approval', text: 'Complete a short document checklist; we submit to the lender and follow up on approval.' },
-      { title: 'Disbursal & delivery', text: 'Funds go directly to the dealer and your new car is ready for delivery.' },
+      { title: 'Lender decision & next steps', text: 'The lender communicates its decision and, if sanctioned, explains disbursal and dealer-payment arrangements.' },
     ],
     faqs: [
       {
         q: 'How much of the car price can be financed?',
-        a: 'Many lenders fund up to 90% of the on-road price for salaried and self-employed applicants, subject to eligibility. We will confirm indicative figures for your profile before you commit.',
+        a: 'The fundable amount varies by lender policy, vehicle, applicant profile and credit assessment. We can help you explore indicative options; the bank/NBFC confirms the final amount.',
       },
       {
         q: 'How long does approval take?',
-        a: 'With complete documents, approval is often within 24–72 working hours. Timelines vary by lender and profile.',
+        a: 'Processing and decision timelines vary by lender, applicant profile and document verification. The lender communicates the final decision.',
       },
       {
         q: 'Can I prepay the loan later?',
-        a: 'Most lenders allow prepayment, sometimes with a small charge depending on the loan type and timing. We will explain the specific lender policy before you sign.',
+        a: 'Prepayment rules and any charges depend on the lender, loan agreement and applicable regulations. Check the written terms shared by the lender before signing.',
       },
       {
         q: 'Do you charge customers a fee?',
-        a: 'Our guidance for the enquiry process is free. If any fee applies for a specific service, it will be stated clearly before you proceed.',
+        a: 'Any service fee, if applicable, should be confirmed with us in writing before you proceed. Lender charges and other third-party costs may also apply.',
       },
     ],
   },
@@ -48,23 +48,23 @@ export const servicePageData: Record<string, ServicePageData> = {
     path: '/services/used-car-finance',
     heroImage: pexels.usedCar,
     intro: [
-      'A pre-owned car is often the smartest buy on the road — if the finance is handled properly. We arrange used car funding with fair valuations, clear rates and verification that protects you from paperwork problems later.',
-      'We support purchases from dealers and individual sellers across most makes and models, including cars up to ten years old, subject to lender policy.',
+      'We help you explore used-car finance options, understand the information lenders may request and coordinate documentation with the selected lender.',
+      'Purchases from dealers or individual sellers may be considered, subject to vehicle condition, age, ownership documents and lender policy.',
     ],
     steps: [
       { title: 'Share car details', text: 'Make, model, year, kilometres and the asking price — photos help too.' },
-      { title: 'Valuation check', text: 'We arrange an indicative market valuation so you know the fair funding amount.' },
-      { title: 'Verification', text: 'RC, insurance, hypothecation and history are checked before the lender files the case.' },
-      { title: 'Payment & transfer', text: 'On approval, the seller is paid and ownership documents move to your name.' },
+      { title: 'Valuation review', text: 'Vehicle valuation and any eligible funding amount are determined under the selected lender’s process and policy.' },
+      { title: 'Document review', text: 'Keep the RC, insurance and available ownership or loan records ready for review by the relevant parties and lender.' },
+      { title: 'Lender decision & transfer', text: 'If the lender sanctions the application, payment and ownership-transfer steps are completed according to the sale and lender requirements.' },
     ],
     faqs: [
       {
         q: 'How old a car can I finance?',
-        a: 'Most lenders fund cars up to around 10 years of age at loan maturity. Exact limits vary, so share the car details and we will confirm options.',
+        a: 'Vehicle-age limits vary by lender and may consider the age at loan maturity. Share the make, model and year so available criteria can be checked.',
       },
       {
         q: 'Can I finance a car bought from an individual seller?',
-        a: 'Yes. Used car loans can often cover private sales. The verification step is especially important here, and we guide you through it.',
+        a: 'Some lenders may consider private-party purchases. Acceptance, seller documentation and payment steps depend on the selected lender.',
       },
       {
         q: 'What documents are needed?',
@@ -72,7 +72,7 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'Are used car interest rates higher than new car rates?',
-        a: 'Usually slightly higher, since the vehicle age adds risk. A good valuation and clean documents keep the rate competitive.',
+        a: 'Rates can differ from new-car finance and are set by each lender after considering vehicle age, condition, applicant profile and credit assessment.',
       },
     ],
   },
@@ -81,19 +81,19 @@ export const servicePageData: Record<string, ServicePageData> = {
     path: '/services/car-refinance',
     heroImage: pexels.refinance,
     intro: [
-      'Your car holds value — refinancing lets you use it. Car refinance releases funds against a vehicle you already own, while you keep driving it as before. It is a practical way to arrange money for business needs, education, travel or emergencies.',
-      'We also assist with balance transfers: if your current car loan rate is high, moving it to a more competitive lender can reduce your EMI or total interest.',
+      'Car refinance may allow an eligible vehicle owner to seek finance against an existing vehicle. Availability, vehicle use, valuation and loan terms depend on the lender’s assessment and agreement.',
+      'We can help you explore balance-transfer enquiries. A transfer may or may not reduce the EMI or total interest after considering the new rate, fees, tenure and foreclosure costs.',
     ],
     steps: [
       { title: 'Tell us about your car', text: 'Model, year, current ownership and any running loan details.' },
-      { title: 'Valuation & eligibility', text: 'We estimate the fundable value and check indicative eligibility.' },
+      { title: 'Valuation & lender review', text: 'The lender assesses the vehicle value, outstanding loan (if any), applicant profile and eligibility.' },
       { title: 'Documentation', text: 'RC, insurance, income proof and existing loan statement (if any) are prepared.' },
-      { title: 'Funds disbursed', text: 'On approval, the amount is credited to your account and you continue using the car.' },
+      { title: 'Lender decision & disbursal', text: 'If sanctioned, the lender confirms disbursal conditions and whether the vehicle can continue to be used under the loan agreement.' },
     ],
     faqs: [
       {
         q: 'Will I lose use of my car during refinancing?',
-        a: 'No. The car stays with you throughout. The lender marks a hypothecation on the RC until the loan is closed.',
+        a: 'Vehicle possession and use are governed by the lender’s product terms and loan agreement. Confirm these conditions with the lender before accepting an offer.',
       },
       {
         q: 'How much money can I raise against my car?',
@@ -101,11 +101,11 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'I still have a running car loan. Can I refinance?',
-        a: 'Often yes — the outstanding can be foreclosed by the new loan, and any surplus value may be released to you. Share your statement for an assessment.',
+        a: 'Some lenders may consider refinancing a vehicle with an existing loan. Any foreclosure, settlement of the old loan and surplus disbursal depend on lender approval and the transaction terms.',
       },
       {
         q: 'What is a balance transfer?',
-        a: 'Moving an existing car loan to another lender offering a lower rate, which can reduce your EMI or total interest. We handle the transfer process.',
+        a: 'A balance transfer means moving an existing car loan to another lender, subject to approval. A lower rate does not automatically mean a lower overall cost; compare processing fees, foreclosure charges, tenure and total repayment before deciding.',
       },
     ],
   },
@@ -114,14 +114,14 @@ export const servicePageData: Record<string, ServicePageData> = {
     path: '/services/commercial-vehicle-finance',
     heroImage: pexels.commercial,
     intro: [
-      'From light commercial vehicles for city delivery to tippers, trailers and tractors, commercial vehicle finance needs to match how your business actually earns. We structure funding around your cash flow, not just a credit score.',
-      'We assist first-time buyers as well as fleet operators adding to their vehicles, working with lenders active in Gujarat’s commercial transport and agri sectors.',
+      'Commercial vehicle finance requirements vary with vehicle type, intended use and business profile. We help you prepare the enquiry and explore lender options; the lender determines the funding structure.',
+      'First-time buyers and fleet operators can enquire. Available products and lender coverage depend on the vehicle, location, applicant profile and lender policy.',
     ],
     steps: [
       { title: 'Discuss the vehicle & use', text: 'The vehicle type, its intended use and your operating route or contract profile.' },
-      { title: 'Structure the funding', text: 'We propose margin money, tenure and EMI structures aligned to your cash flows.' },
+      { title: 'Review funding requirements', text: 'We help outline the vehicle cost, expected contribution and repayment needs for lender assessment.' },
       { title: 'Documents & submission', text: 'Business proof, income documents and vehicle quotation are compiled and filed.' },
-      { title: 'Approval & delivery', text: 'On sanction, the dealer is paid and the vehicle goes on the road.' },
+      { title: 'Lender decision & delivery', text: 'If the lender sanctions the application, it confirms the disbursal conditions and payment process. Vehicle delivery follows the lender, dealer and buyer requirements.' },
     ],
     faqs: [
       {
@@ -130,15 +130,15 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'I am a first-time commercial vehicle buyer. Can I get finance?',
-        a: 'Yes. Several lenders have programmes for first-time CV buyers. Income proof and a clear vehicle plan matter most; we guide you through both.',
+        a: 'Some lenders may consider first-time commercial vehicle buyers. Eligibility and terms depend on lender policy, income assessment and the vehicle/business profile.',
       },
       {
         q: 'What margin money is required?',
-        a: 'Typically 10–25% of the vehicle cost depending on the vehicle and profile. We confirm indicative figures before applying.',
+        a: 'Margin contribution varies by lender, vehicle, applicant profile and assessment. The selected lender confirms the required amount.',
       },
       {
         q: 'Can income be shown through bank statements only?',
-        a: 'Many lenders accept banking turnover as income evidence for self-employed applicants. Share your statements for an indicative check.',
+        a: 'Some lenders may consider bank statements as part of income assessment. Required evidence varies by lender and applicant profile.',
       },
     ],
   },
@@ -147,14 +147,14 @@ export const servicePageData: Record<string, ServicePageData> = {
     path: '/services/insurance-assistance',
     heroImage: pexels.insurance,
     intro: [
-      'Motor insurance is compulsory — but the right cover is a choice. We help you understand comprehensive versus third-party cover, which add-ons genuinely add value, and how claims work, in plain language.',
-      'Whether you are renewing an existing policy, buying cover for a new vehicle or transferring insurance after a used car purchase, we handle the process end to end.',
+      'Motor third-party insurance is generally required for vehicles used on public roads in India. We help explain third-party and package policy options, add-ons and common claim steps in clear language.',
+      'You can enquire about policy renewal, cover for a new vehicle or transfer after a used-car purchase. Policy issuance and acceptance are subject to the insurer’s process and terms.',
     ],
     steps: [
       { title: 'Share your policy or vehicle', text: 'Current policy details, or the vehicle you need cover for.' },
       { title: 'Cover recommendation', text: 'We explain suitable options, IDV, deductibles and useful add-ons — with no pushy upselling.' },
-      { title: 'Policy issuance', text: 'Chosen cover is documented and the policy is issued or renewed promptly.' },
-      { title: 'Claim support', text: 'If you ever need to claim, we guide you through the steps and documentation.' },
+      { title: 'Insurer decision & policy', text: 'The insurer confirms acceptance, premium, coverage and issuance requirements for the selected policy.' },
+      { title: 'Claim guidance', text: 'We can help explain the claim process and documents; claim decisions are made by the insurer under the policy.' },
     ],
     faqs: [
       {
@@ -163,7 +163,7 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'My policy has expired. Can it be renewed?',
-        a: 'Usually yes, though a fresh vehicle inspection may be required if there is a break in coverage. Renewing before expiry avoids that hassle.',
+        a: 'Renewal after expiry may require inspection or additional steps under the insurer’s rules. Contact the insurer or us to check the requirements for your vehicle.',
       },
       {
         q: 'Which add-ons are worth considering?',
@@ -171,7 +171,7 @@ export const servicePageData: Record<string, ServicePageData> = {
       },
       {
         q: 'I bought a used car. How do I transfer the insurance?',
-        a: 'The policy must be transferred to your name along with the RC transfer. We handle the paperwork with the insurer.',
+        a: 'Notify the insurer and complete the required policy-transfer process within the applicable timelines. The insurer confirms documents and endorsement requirements.',
       },
     ],
   },

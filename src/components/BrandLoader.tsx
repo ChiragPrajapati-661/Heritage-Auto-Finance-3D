@@ -30,12 +30,18 @@ export default function BrandLoader() {
         done ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
     >
-      <div className="relative">
-        <span className="absolute inset-0 -m-4 rounded-full border border-gold-500/20 animate-pulse-slow" />
-        <LogoMark />
+      <div className="relative flex flex-col items-center">
+        {!site.logoSrc && (
+          <span className="absolute inset-0 -m-4 rounded-full border border-gold-500/20 animate-pulse-slow" />
+        )}
+        <LogoMark imgClassName="h-14 sm:h-16 w-auto max-w-[260px]" />
       </div>
-      <p className="mt-6 font-display text-xl font-semibold tracking-[0.2em] text-white">HERITAGE</p>
-      <p className="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.4em] text-gold-500">Auto Finance</p>
+      {!site.logoSrc && (
+        <>
+          <p className="mt-6 font-display text-xl font-semibold tracking-[0.2em] text-white">HERITAGE</p>
+          <p className="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.4em] text-gold-500">Auto Finance</p>
+        </>
+      )}
       <div className="mt-8 h-px w-44 overflow-hidden rounded bg-white/10">
         <div className="h-full w-1/3 rounded bg-gold-gradient animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
       </div>

@@ -12,11 +12,13 @@ export default function Footer() {
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <LogoMark />
-            <span className="leading-tight">
-              <span className="block font-display text-lg font-semibold tracking-wide text-white">HERITAGE</span>
-              <span className="block text-[0.6rem] font-medium uppercase tracking-[0.35em] text-gold-500">Auto Finance</span>
-            </span>
+            <LogoMark imgClassName="h-11 sm:h-12 w-auto max-w-[200px]" />
+            {!site.logoSrc && (
+              <span className="leading-tight">
+                <span className="block font-display text-lg font-semibold tracking-wide text-white">HERITAGE</span>
+                <span className="block text-[0.6rem] font-medium uppercase tracking-[0.35em] text-gold-500">Auto Finance</span>
+              </span>
+            )}
           </div>
           <p className="mt-5 text-sm leading-relaxed text-neutral-400">
             Vehicle finance assistance from {site.location.city}, {site.location.state} — new cars, used cars, refinancing,

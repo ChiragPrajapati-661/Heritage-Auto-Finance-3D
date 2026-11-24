@@ -62,8 +62,7 @@ export default function FinanceComparison() {
             <p className="mt-2 font-display text-xl font-semibold text-gold-400">{inr.format(amount)}</p>
           </div>
           <p className="max-w-sm text-xs leading-relaxed text-neutral-500">
-            Indicative comparison across finance types using typical planning rates. Your actual rate
-            depends on the vehicle, your profile and lender approval.
+            Illustrative comparison only, using example annual-rate assumptions for calculation. These are not Heritage Auto Finance offers or lender quotes. Actual rates, eligibility, loan amount and tenure are determined by the selected bank/NBFC after assessment.
           </p>
         </div>
 
@@ -83,7 +82,7 @@ export default function FinanceComparison() {
               >
                 <span className="flex items-center justify-between">
                   <Icon className={`h-5 w-5 ${active ? 'text-gold-400' : 'text-neutral-400'}`} aria-hidden="true" />
-                  <span className="text-[0.65rem] uppercase tracking-wider text-neutral-500">{r.rate}% p.a.</span>
+                  <span className="text-[0.65rem] uppercase tracking-wider text-neutral-500">Example {r.rate}% p.a.</span>
                 </span>
                 <span className="mt-3 block text-sm font-semibold text-white">{r.label}</span>
                 <span className="mt-1 block font-display text-2xl font-semibold text-gold-400">{inr.format(r.emi)}</span>

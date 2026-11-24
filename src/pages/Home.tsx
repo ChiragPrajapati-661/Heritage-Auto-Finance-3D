@@ -23,31 +23,31 @@ const iconMap: Record<string, typeof Car> = {
 const whyUs = [
   {
     icon: BadgePercent,
-    title: 'Competitive rates',
-    text: 'We compare options across lenders so you get terms that fit your budget, not ours.',
+    title: 'Lender options',
+    text: 'Explore available finance options and understand lender terms before you proceed.',
   },
   {
     icon: FileCheck2,
-    title: 'Minimal paperwork',
-    text: 'Clear checklists and guided documentation mean fewer surprises and faster processing.',
+    title: 'Document guidance',
+    text: 'Get a clear document checklist and guidance on the information lenders may require.',
   },
   {
     icon: Landmark,
-    title: 'Lender network',
-    text: 'Access to finance options across banks and NBFCs active in Gujarat — matched to your profile.',
+    title: 'Lender assessment',
+    text: 'Available options depend on lender policies, your profile and vehicle details.',
   },
   {
     icon: KeyRound,
-    title: 'End-to-end support',
-    text: 'From eligibility check to disbursal and insurance renewal, one point of contact throughout.',
+    title: 'Enquiry assistance',
+    text: 'Get assistance with your enquiry and documentation through the lender review process.',
   },
 ];
 
 const processSteps = [
   { title: 'Tell us your need', text: 'Submit the enquiry form, WhatsApp or call us with the vehicle and finance type.' },
-  { title: 'Free eligibility check', text: 'We assess your profile and suggest suitable finance options and tenures.' },
+  { title: 'Initial profile review', text: 'We discuss your profile and enquiry details to understand which lender options may be relevant.' },
   { title: 'Documentation', text: 'A simple, guided checklist. We verify papers before submission to the lender.' },
-  { title: 'Approval & disbursal', text: 'On lender approval, funds are disbursed and you drive away. We stay available after.' },
+  { title: 'Lender decision', text: 'The selected lender reviews the application and decides sanction, terms and disbursal.' },
 ];
 
 export default function Home() {
@@ -75,12 +75,12 @@ export default function Home() {
       <section className="relative container-site scroll-mt-20 py-20 sm:py-28" aria-label="Vehicle showcase">
         <GoldTrails />
         <SectionHeading
-          eyebrow="Showroom"
-          title="Take a closer look"
-          description="Drag the car to rotate it a full 360 degrees — a small taste of the attention every enquiry gets."
+          eyebrow="Showroom Collection"
+          title="Experience Dealership Luxury"
+          description="Explore our curated vehicle finance categories, view multi-angle studio perspectives, and calculate your custom monthly instalment."
         />
-        <div className="relative mx-auto mt-10 max-w-3xl">
-          <Suspense fallback={<div className="h-[320px] animate-pulse rounded-2xl bg-white/[0.03] sm:h-[420px]" aria-hidden="true" />}>
+        <div className="relative mx-auto mt-10 max-w-5xl">
+          <Suspense fallback={<div className="h-[480px] animate-pulse rounded-2xl bg-white/[0.03]" aria-hidden="true" />}>
             <CarShowcase />
           </Suspense>
         </div>

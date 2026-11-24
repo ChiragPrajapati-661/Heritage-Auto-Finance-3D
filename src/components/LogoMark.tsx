@@ -16,7 +16,9 @@ export default function LogoMark({ compact = false, imgClassName }: LogoProps) {
       <img
         src={site.logoSrc}
         alt={`${site.name} logo`}
-        className={`h-10 w-10 rounded-full object-contain ${imgClassName ?? ''}`}
+        loading="eager"
+        decoding="async"
+        className={`h-10 w-auto max-w-[180px] rounded-none object-contain ${imgClassName ?? ''}`}
       />
     );
   }

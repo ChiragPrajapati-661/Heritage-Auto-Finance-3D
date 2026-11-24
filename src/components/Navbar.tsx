@@ -22,6 +22,15 @@ export default function Navbar() {
   }, [location.pathname]);
 
   useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open]);
+
+  useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
@@ -41,11 +50,13 @@ export default function Navbar() {
     >
       <div className="container-site flex items-center justify-between gap-4 py-4">
         <Link to="/" className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 rounded" aria-label={`${site.name} home`}>
-          <LogoMark />
-          <span className="leading-tight">
-            <span className="block font-display text-lg font-semibold tracking-wide text-white">HERITAGE</span>
-            <span className="block text-[0.6rem] font-medium uppercase tracking-[0.35em] text-gold-500">Auto Finance</span>
-          </span>
+          <LogoMark imgClassName="h-10 sm:h-11 w-auto max-w-[190px]" />
+          {!site.logoSrc && (
+            <span className="leading-tight">
+              <span className="block font-display text-lg font-semibold tracking-wide text-white">HERITAGE</span>
+              <span className="block text-[0.6rem] font-medium uppercase tracking-[0.35em] text-gold-500">Auto Finance</span>
+            </span>
+          )}
         </Link>
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {navigation.slice(0, 4).map((item) => (
@@ -84,6 +95,7 @@ export default function Navbar() {
           className="rounded-lg border border-white/10 p-2 text-neutral-200 transition-colors hover:border-gold-500/50 hover:text-gold-400 lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
+          aria-controls="mobile-primary-navigation"
           aria-label={open ? 'Close menu' : 'Open menu'}
         >
           {open ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
@@ -91,7 +103,8 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`fixed inset-0 top-[72px] z-40 overflow-y-auto bg-night-950/97 backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        id="mobile-primary-navigation"
+        className={`fixed inset-0 top-[76px] z-40 overflow-y-auto bg-night-950/97 backdrop-blur-xl transition-all duration-300 lg:hidden ${
           open ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >
@@ -111,6 +124,10 @@ export default function Navbar() {
             </NavLink>
           ))}
           <div className="mt-4 flex flex-col gap-3">
+            <Link to="/emi-calculator" className="btn-ghost w-full justify-center">
+              <Calculator className="h-4 w-4" aria-hidden="true" />
+              Calculate EMI
+            </Link>
             <a href={`tel:${site.phoneDial}`} className="btn-gold w-full">
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call {site.phoneDisplay}

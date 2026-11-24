@@ -1,25 +1,30 @@
-import { useState, useEffect } from 'react';
-import { MessageCircle, Phone } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { MessageCircle, Phone, X } from 'lucide-react';
 import { site, whatsappLink } from '@/config/site';
 
 /**
- * Floating WhatsApp-first contact dock, present on every page.
- * Opens with the WhatsApp action visible; call is one tap away.
+ * User-controlled floating contact dock, present on every page.
+ * Keeps WhatsApp and phone actions available without covering page content on load.
  */
 export default function ContactDock() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const timer = window.setTimeout(() => setOpen(true), 1600);
-    return () => window.clearTimeout(timer);
-  }, []);
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open]);
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
       <div
+        id="floating-contact-options"
+        aria-hidden={!open}
         className={`glass-card flex flex-col overflow-hidden transition-all duration-300 ${
-          open ? 'max-h-40 w-64 opacity-100' : 'max-h-0 w-64 border-transparent opacity-0'
+          open ? 'visible max-h-40 w-64 opacity-100' : 'invisible max-h-0 w-64 border-transparent opacity-0'
         }`}
       >
         <a
@@ -39,16 +44,16 @@ export default function ContactDock() {
           Call {site.phoneDisplay}
         </a>
       </div>
-      <a
-        href={whatsappLink(`Hello ${site.name}, I would like to enquire about vehicle finance.`)}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat with us on WhatsApp"
-        onMouseEnter={() => setOpen(true)}
+      <button
+        type="button"
+        aria-label={open ? 'Close contact options' : 'Open contact options'}
+        aria-expanded={open}
+        aria-controls="floating-contact-options"
+        onClick={() => setOpen((value) => !value)}
         className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-gold-lg transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
       >
-        <MessageCircle className="h-7 w-7" aria-hidden="true" />
-      </a>
+        {open ? <X className="h-6 w-6" aria-hidden="true" /> : <MessageCircle className="h-7 w-7" aria-hidden="true" />}
+      </button>
     </div>
   );
 }

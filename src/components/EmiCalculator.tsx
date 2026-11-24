@@ -71,7 +71,7 @@ export default function EmiCalculator({
             <div className="mb-3 flex items-center justify-between">
               <label htmlFor="emi-rate" className="field-label !mb-0 flex items-center gap-2">
                 <Percent className="h-4 w-4 text-gold-500" aria-hidden="true" />
-                Interest rate (annual)
+                Illustrative annual rate (assumption)
               </label>
               <span className="font-display text-xl font-semibold text-gold-400">{rate.toFixed(1)}%</span>
             </div>
@@ -135,7 +135,7 @@ export default function EmiCalculator({
             </div>
           </dl>
           <p className="mt-5 text-xs leading-relaxed text-neutral-500">
-            Estimates only. Actual rates depend on the vehicle, your profile and lender approval.
+            Illustrative planning estimate only, not a rate offered or quoted by Heritage Auto Finance. The bank/NBFC determines the actual interest rate, eligible loan amount, tenure and EMI after reviewing your application, credit profile and documents. Fees and insurance may also change the final cost.
           </p>
           {!compact && (
             <Link to="/contact" className="btn-gold mt-6 w-full">
