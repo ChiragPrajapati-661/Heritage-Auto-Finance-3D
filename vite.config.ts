@@ -4,7 +4,8 @@ import { fileURLToPath, URL } from 'node:url';
 
 // GitHub Pages project-site base path.
 export default defineConfig({
-  base: '/Heritage-Auto-Finance-3D/',
+  // Custom-domain deployment at https://heritageautofinance.in/
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {
