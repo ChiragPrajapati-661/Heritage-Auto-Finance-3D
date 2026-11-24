@@ -13,6 +13,28 @@ const routes = [
 const root = process.cwd();
 const dist = resolve(root, 'dist');
 const template = await readFile(join(dist, 'index.html'), 'utf8');
+
+// Keep the XML sitemap and the prerendered route list in sync.
+const sitemap = await readFile(join(root, 'public/sitemap.xml'), 'utf8');
+const robots = await readFile(join(root, 'public/robots.txt'), 'utf8');
+const sitemapUrls = [...sitemap.matchAll(/<loc>\\s*(.*?)\\s*<\\/loc>/g)].map((match) => match[1].trim());
+const sitemapRoutes = sitemapUrls.map((value) => {
+  const url = new URL(value);
+  if (url.origin !== 'https://heritageautofinance.in' || url.search || url.hash) {
+    throw new Error(`Unexpected sitemap URL: ${value}`);
+  }
+  return url.pathname === '/' ? '/' : url.pathname.replace(/\\/$/, '');
+});
+const expectedRoutes = [...routes].sort();
+const actualRoutes = [...sitemapRoutes].sort();
+if (new Set(sitemapRoutes).size !== sitemapRoutes.length
+  || JSON.stringify(actualRoutes) !== JSON.stringify(expectedRoutes)) {
+  throw new Error('Sitemap URLs do not exactly match the public prerender route list.');
+}
+if (!robots.includes('Sitemap: https://heritageautofinance.in/sitemap.xml')) {
+  throw new Error('robots.txt does not reference the canonical sitemap URL.');
+}
+console.log(`Verified sitemap and robots.txt for ${routes.length} public routes.`);
 const server = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4173', '--strictPort'], {
   cwd: root, stdio: 'ignore', shell: process.platform === 'win32',
 });
