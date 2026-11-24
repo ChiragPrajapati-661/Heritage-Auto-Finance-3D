@@ -12,6 +12,7 @@ const routes = [
 ];
 const root = process.cwd();
 const dist = resolve(root, 'dist');
+const template = await readFile(join(dist, 'index.html'), 'utf8');
 const server = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4173', '--strictPort'], {
   cwd: root, stdio: 'ignore', shell: process.platform === 'win32',
 });
@@ -39,9 +40,8 @@ try {
     const title = await page.title();
     const rootHtml = await page.locator('#root').innerHTML();
     if (!rootHtml || rootHtml.trim().length < 100) throw new Error(`Rendered content is unexpectedly empty: ${route}`);
-    const source = await readFile(join(dist, 'index.html'), 'utf8');
-    const output = source.replace('<div id="root"></div>', `<div id="root">${rootHtml}</div>`);
-    if (output === source) throw new Error('Could not find root mount point in dist/index.html');
+    const output = template.replace('<div id="root"></div>', `<div id="root">${rootHtml}</div>`);
+    if (output === template) throw new Error('Could not find root mount point in the Vite HTML template');
     const relative = route === '/' ? '' : route.slice(1);
     const target = join(dist, relative, 'index.html');
     await mkdir(resolve(target, '..'), { recursive: true });
