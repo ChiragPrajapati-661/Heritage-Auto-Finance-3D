@@ -6,15 +6,15 @@ interface LogoProps {
 }
 
 /**
- * Brand mark. Uses the original logo file when site.logoSrc is set
- * (or public/brand/logo.png exists — update site.logoSrc to '/brand/logo.png'),
- * otherwise falls back to the Heritage monogram.
+ * Brand mark. Prefix the configured public asset with Vite's BASE_URL so
+ * the official logo also loads correctly on GitHub Pages project sites.
  */
 export default function LogoMark({ compact = false, imgClassName }: LogoProps) {
   if (site.logoSrc) {
+    const logoSrc = `${import.meta.env.BASE_URL}${site.logoSrc.replace(/^\//, '')}`;
     return (
       <img
-        src={site.logoSrc}
+        src={logoSrc}
         alt={`${site.name} logo`}
         loading="eager"
         decoding="async"
