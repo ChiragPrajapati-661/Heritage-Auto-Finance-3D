@@ -7,7 +7,7 @@ import { useReducedMotion, useWebGLAvailable } from '@/lib/hooks';
 const CarScene = lazy(() => import('@/components/three/CarScene'));
 
 const heroImg =
-  'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1920';
+  'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1280';
 
 export default function Hero3D() {
   const reducedMotion = useReducedMotion();
@@ -24,6 +24,8 @@ export default function Hero3D() {
             src={heroImg}
             alt=""
             loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="h-full w-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-night-950/70 via-night-950/40 to-night-950" />
