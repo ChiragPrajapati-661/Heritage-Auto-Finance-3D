@@ -71,7 +71,7 @@ export default function TermsAndConditions() {
       />
       <article className="container-site max-w-3xl pb-24 pt-36 sm:pt-44">
         <SectionHeading eyebrow="Legal" title="Terms and Conditions" align="left" />
-        <p className="mt-4 text-sm text-neutral-500">Effective date: 1 December 2025</p>
+        <p className="mt-4 text-sm text-neutral-500">Effective date: 24 November 2026</p>
         <div className="mt-10 space-y-10">
           {sections.map((s) => (
             <section key={s.title}>
