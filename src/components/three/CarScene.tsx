@@ -26,7 +26,7 @@ interface SceneRefs {
 /* ─── Floating Gold Atmosphere Particles ─────────────────── */
 function ShowroomAtmosphere({ reducedMotion }: { reducedMotion: boolean }) {
   const pointsRef = useRef<THREE.Points>(null);
-  const particleCount = 140;
+  const particleCount = 90;
 
   const positions = useMemo(() => {
     const arr = new Float32Array(particleCount * 3);
@@ -157,7 +157,7 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
 
   return (
     <Canvas
-      dpr={[1, 1.5]}
+      dpr={[1, typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 1.25]}
       camera={{ position: [5.2, 2.2, 5.2], fov: 40 }}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
     >
@@ -172,7 +172,7 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
         intensity={180}
         color="#faebd0"
         castShadow
-        shadow-mapSize={[1024, 1024]}
+        shadow-mapSize={[512, 512]}
         shadow-bias={-0.0003}
       />
 
