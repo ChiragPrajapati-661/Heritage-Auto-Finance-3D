@@ -21,6 +21,7 @@ interface SceneRefs {
   pointer: React.MutableRefObject<{ x: number; y: number }>;
   scroll: React.MutableRefObject<number>;
   reducedMotion: boolean;
+  mobile: boolean;
 }
 
 /* ─── Floating Gold Atmosphere Particles ─────────────────── */
@@ -74,9 +75,10 @@ function HeroCarRig({ pointer, scroll, reducedMotion }: SceneRefs) {
     const t = clock.elapsedTime;
 
     if (!reducedMotion) {
-      // Gentle cinematic breathing idle
+      // Gentle cinematic breathing idle; lower the car on portrait screens
+      // so it sits below the headline and does not compete with the copy.
       group.current.rotation.y += 0.0016;
-      group.current.position.y  = Math.sin(t * 0.55) * 0.028;
+      group.current.position.y  = (mobile ? -0.95 : 0) + Math.sin(t * 0.55) * 0.028;
       group.current.rotation.z  = Math.sin(t * 0.38) * 0.005;
     }
 
@@ -100,8 +102,8 @@ function HeroCarRig({ pointer, scroll, reducedMotion }: SceneRefs) {
   });
 
   return (
-    // Scale 1.35 brings the sports car forward so it has commanding presence
-    <group ref={group} scale={1.35}>
+    // A smaller, lower mobile composition keeps the vehicle behind the hero copy.
+    <group ref={group} scale={mobile ? 0.88 : 1.35} position={mobile ? [0.15, -0.95, 0] : [0, 0, 0]}>
       <SportsCarModel m={m} />
       {/* Dynamic forward headlight projector beams */}
       <pointLight ref={headlightL} position={[3.5, 0.45, 0.65]} distance={8} color="#ffeec0" intensity={2.2} />
@@ -211,7 +213,7 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
       <CameraController pointer={pointer} reducedMotion={reducedMotion} mobile={mobile} />
 
       <Float speed={reducedMotion ? 0 : 0.9} rotationIntensity={0} floatIntensity={reducedMotion ? 0 : 0.22}>
-        <HeroCarRig pointer={pointer} scroll={scroll} reducedMotion={reducedMotion} />
+        <HeroCarRig pointer={pointer} scroll={scroll} reducedMotion={reducedMotion} mobile={mobile} />
       </Float>
 
       <ShowroomAtmosphere reducedMotion={reducedMotion} />
