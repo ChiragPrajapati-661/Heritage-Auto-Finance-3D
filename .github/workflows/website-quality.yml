@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - "sync/**"
+      - "feature/**"
   pull_request:
     branches:
       - main
@@ -38,11 +39,29 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: Verify GitHub Pages output
+      - name: Install temporary Playwright renderer
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install chromium
+
+      - name: Prerender public routes
+        run: npm run prerender
+
+      - name: Verify prerendered routes and SEO files
         run: |
           test -s dist/index.html
           test -s dist/robots.txt
           test -s dist/sitemap.xml
+          test -s dist/services/new-car-finance/index.html
+          test -s dist/services/used-car-finance/index.html
+          test -s dist/services/car-refinance/index.html
+          test -s dist/services/commercial-vehicle-finance/index.html
+          test -s dist/services/insurance-assistance/index.html
+          test -s dist/emi-calculator/index.html
+          test -s dist/about/index.html
+          test -s dist/contact/index.html
+          test -s dist/privacy-policy/index.html
+          test -s dist/terms-and-conditions/index.html
           cp dist/index.html dist/404.html
           test -s dist/404.html
-          echo "Production entry point, SEO files, and SPA fallback are present."
+          echo "All public routes have prerendered HTML."

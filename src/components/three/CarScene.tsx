@@ -114,15 +114,21 @@ function HeroCarRig({ pointer, scroll, reducedMotion }: SceneRefs) {
 function CameraController({
   pointer,
   reducedMotion,
+  mobile,
 }: {
   pointer: React.MutableRefObject<{ x: number; y: number }>;
   reducedMotion: boolean;
+  mobile: boolean;
 }) {
   useFrame((state) => {
     if (reducedMotion) return;
     const { x, y } = pointer.current;
-    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, 5.2 + x * 0.5, 0.038);
-    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, 2.2 - y * 0.3, 0.038);
+    // Portrait screens need a near side-on, pulled-back view to keep the full
+    // vehicle visible, matching the wide desktop side-profile composition.
+    const baseX = mobile ? 0 : 5.2;
+    const baseY = mobile ? 3.0 : 2.2;
+    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, baseX + x * (mobile ? 0.10 : 0.5), 0.038);
+    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, baseY - y * (mobile ? 0.08 : 0.3), 0.038);
     state.camera.lookAt(0, 0.25, 0);
   });
   return null;
@@ -134,6 +140,8 @@ function CameraController({
 export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) {
   const pointer = useRef({ x: 0, y: 0 });
   const scroll  = useRef(0);
+  // Keep the complete vehicle in frame on portrait screens and reduce GPU load.
+  const mobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -157,9 +165,12 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
 
   return (
     <Canvas
-      dpr={[1, typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 1.25]}
-      camera={{ position: [5.2, 2.2, 5.2], fov: 40 }}
-      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+      dpr={mobile ? [0.8, 1] : [1, 1.25]}
+      camera={mobile
+        ? { position: [0, 3.0, 13.5], fov: 40 }
+        : { position: [5.2, 2.2, 5.2], fov: 40 }}
+      gl={{ antialias: !mobile, alpha: true, powerPreference: mobile ? 'low-power' : 'high-performance' }}
+      shadows={!mobile}
     >
       {/* ── Studio Showroom Lighting Rig ── */}
       <ambientLight intensity={0.28} color="#9a8db4" />
@@ -197,7 +208,7 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
       {/* Subtle gold underbody floor bounce */}
       <pointLight position={[0, -0.4, 0]} intensity={14} color={CAR_GOLD} distance={6} />
 
-      <CameraController pointer={pointer} reducedMotion={reducedMotion} />
+      <CameraController pointer={pointer} reducedMotion={reducedMotion} mobile={mobile} />
 
       <Float speed={reducedMotion ? 0 : 0.9} rotationIntensity={0} floatIntensity={reducedMotion ? 0 : 0.22}>
         <HeroCarRig pointer={pointer} scroll={scroll} reducedMotion={reducedMotion} />

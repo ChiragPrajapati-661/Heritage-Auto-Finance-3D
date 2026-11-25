@@ -139,23 +139,23 @@ export default function FinanceEnquiryForm({
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="f-name" className="field-label">Full name</label>
-          <input id="f-name" type="text" autoComplete="name" className="field-input" value={form.name} onChange={update('name')} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'f-name-err' : undefined} placeholder="Your name" maxLength={100} />
+          <label htmlFor="f-name" className="field-label">Full name <span className="text-gold-400" aria-hidden="true">*</span></label>
+          <input id="f-name" type="text" required autoComplete="name" className="field-input" value={form.name} onChange={update('name')} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'f-name-err' : undefined} placeholder="Your name" maxLength={100} />
           {errors.name && <p id="f-name-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.name}</p>}
         </div>
         <div>
-          <label htmlFor="f-mobile" className="field-label">Mobile number</label>
-          <input id="f-mobile" type="tel" inputMode="numeric" autoComplete="tel" className="field-input" value={form.mobile} onChange={update('mobile')} aria-invalid={!!errors.mobile} aria-describedby={errors.mobile ? 'f-mobile-err' : undefined} placeholder="10-digit mobile" maxLength={14} />
+          <label htmlFor="f-mobile" className="field-label">Mobile number <span className="text-gold-400" aria-hidden="true">*</span></label>
+          <input id="f-mobile" type="tel" required inputMode="numeric" autoComplete="tel" className="field-input" value={form.mobile} onChange={update('mobile')} aria-invalid={!!errors.mobile} aria-describedby={errors.mobile ? 'f-mobile-err' : undefined} placeholder="10-digit mobile" maxLength={14} />
           {errors.mobile && <p id="f-mobile-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.mobile}</p>}
         </div>
         <div>
-          <label htmlFor="f-city" className="field-label">City / Town</label>
-          <input id="f-city" type="text" autoComplete="address-level2" className="field-input" value={form.city} onChange={update('city')} aria-invalid={!!errors.city} aria-describedby={errors.city ? 'f-city-err' : undefined} placeholder="e.g. Mehsana" maxLength={100} />
+          <label htmlFor="f-city" className="field-label">City / Town <span className="text-gold-400" aria-hidden="true">*</span></label>
+          <input id="f-city" type="text" required autoComplete="address-level2" className="field-input" value={form.city} onChange={update('city')} aria-invalid={!!errors.city} aria-describedby={errors.city ? 'f-city-err' : undefined} placeholder="e.g. Mehsana" maxLength={100} />
           {errors.city && <p id="f-city-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.city}</p>}
         </div>
         <div>
-          <label htmlFor="f-vehicle" className="field-label">Vehicle type</label>
-          <select id="f-vehicle" className="field-input" value={form.vehicleType} onChange={update('vehicleType')} aria-invalid={!!errors.vehicleType} aria-describedby={errors.vehicleType ? 'f-vehicle-err' : undefined}>
+          <label htmlFor="f-vehicle" className="field-label">Vehicle type <span className="text-gold-400" aria-hidden="true">*</span></label>
+          <select id="f-vehicle" required className="field-input" value={form.vehicleType} onChange={update('vehicleType')} aria-invalid={!!errors.vehicleType} aria-describedby={errors.vehicleType ? 'f-vehicle-err' : undefined}>
             <option value="">Select vehicle type</option>
             {vehicleTypes.map((v) => (
               <option key={v} value={v}>{v}</option>
@@ -164,8 +164,8 @@ export default function FinanceEnquiryForm({
           {errors.vehicleType && <p id="f-vehicle-err" role="alert" className="mt-1.5 text-xs text-red-400">{errors.vehicleType}</p>}
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="f-enquiry" className="field-label">Enquiry type</label>
-          <select id="f-enquiry" className="field-input" value={form.enquiryType} onChange={update('enquiryType')} aria-invalid={!!errors.enquiryType} aria-describedby={errors.enquiryType ? 'f-enquiry-err' : undefined}>
+          <label htmlFor="f-enquiry" className="field-label">Enquiry type <span className="text-gold-400" aria-hidden="true">*</span></label>
+          <select id="f-enquiry" required className="field-input" value={form.enquiryType} onChange={update('enquiryType')} aria-invalid={!!errors.enquiryType} aria-describedby={errors.enquiryType ? 'f-enquiry-err' : undefined}>
             <option value="">Select enquiry type</option>
             {enquiryTypes.map((t) => (
               <option key={t} value={t}>{t}</option>
@@ -184,6 +184,7 @@ export default function FinanceEnquiryForm({
           <input
             id="f-consent"
             type="checkbox"
+            required
             checked={form.consent}
             onChange={(event) => {
               setForm((current) => ({ ...current, consent: event.target.checked }));
