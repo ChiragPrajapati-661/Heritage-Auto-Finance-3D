@@ -125,8 +125,8 @@ function CameraController({
     const { x, y } = pointer.current;
     // Keep the exact desktop viewing angle on mobile; only pull the camera
     // back proportionally so the same 3D car composition fits a narrow screen.
-    const baseX = mobile ? 7.4 : 5.2;
-    const baseY = mobile ? 3.13 : 2.2;
+    const baseX = mobile ? 15.5 : 5.2;
+    const baseY = mobile ? 6.56 : 2.2;
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, baseX + x * (mobile ? 0.18 : 0.5), 0.038);
     state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, baseY - y * (mobile ? 0.12 : 0.3), 0.038);
     state.camera.lookAt(0, 0.25, 0);
@@ -167,7 +167,7 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
     <Canvas
       dpr={mobile ? [0.8, 1] : [1, 1.25]}
       camera={mobile
-        ? { position: [7.4, 3.13, 7.4], fov: 40 }
+        ? { position: [15.5, 6.56, 15.5], fov: 40 }
         : { position: [5.2, 2.2, 5.2], fov: 40 }}
       gl={{ antialias: true, alpha: true, powerPreference: mobile ? 'low-power' : 'high-performance' }}
       shadows
