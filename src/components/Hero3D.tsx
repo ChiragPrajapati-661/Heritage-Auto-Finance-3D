@@ -45,24 +45,24 @@ export default function Hero3D() {
 
       <div className="container-site relative z-10 grid gap-10 pt-32 pb-24 lg:grid-cols-[1fr_420px] lg:items-center">
         <div className="animate-fade-up">
-          <p className="eyebrow">Mehsana, Gujarat — Serving Customers Across Gujarat</p>
-          <h1 className="mt-4 max-w-3xl font-display text-5xl font-semibold uppercase leading-[1.08] text-white sm:text-6xl lg:text-7xl">
+          <p className="eyebrow max-w-full text-[0.65rem] leading-relaxed tracking-[0.22em] sm:text-xs sm:tracking-[0.3em]">Mehsana, Gujarat — Serving Customers Across Gujarat</p>
+          <h1 className="mt-4 max-w-3xl font-display text-[clamp(2.35rem,9.3vw,3.25rem)] font-semibold uppercase leading-[1.04] text-white sm:text-6xl lg:text-7xl">
             Drive Your Dream.
             <span className="block bg-gold-gradient bg-clip-text text-transparent">Finance Your Future.</span>
           </h1>
-          <p className="mt-5 text-sm font-medium uppercase tracking-[0.25em] text-gold-400 sm:text-base">
+          <p className="mt-4 text-xs font-medium uppercase tracking-[0.18em] text-gold-400 sm:mt-5 sm:text-base sm:tracking-[0.25em]">
             Premium Vehicle Finance Solutions by Heritage Auto Finance
           </p>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-300 sm:text-lg">
+          <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-neutral-300 sm:mt-5 sm:text-lg">
             New cars, pre-owned cars, refinancing and commercial vehicles — Heritage Auto Finance
             helps you explore suitable finance options with clear information and guided next steps.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-            <Link to="/contact" className="btn-gold">
+            <Link to="/contact" className="btn-gold w-full sm:w-auto">
               Apply Now
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <a href="#services" className="btn-ghost">
+            <a href="#services" className="btn-ghost w-full sm:w-auto">
               Explore Services
             </a>
           </div>
