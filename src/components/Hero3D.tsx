@@ -12,7 +12,9 @@ const heroImg =
 export default function Hero3D() {
   const reducedMotion = useReducedMotion();
   const webgl = useWebGLAvailable();
-  const show3D = webgl && !reducedMotion;
+  // Reduced-motion users still get the 3D car; its animation is paused inside the scene.
+  // Only fall back to the photo when the browser cannot create a WebGL context.
+  const show3D = webgl;
 
   return (
     <section className="relative flex min-h-[100svh] items-center overflow-hidden" aria-label="Introduction">
