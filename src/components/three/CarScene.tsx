@@ -123,12 +123,12 @@ function CameraController({
   useFrame((state) => {
     if (reducedMotion) return;
     const { x, y } = pointer.current;
-    // Portrait screens need a near side-on, pulled-back view to keep the full
-    // vehicle visible, matching the wide desktop side-profile composition.
-    const baseX = mobile ? 0 : 5.2;
-    const baseY = mobile ? 3.0 : 2.2;
-    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, baseX + x * (mobile ? 0.10 : 0.5), 0.038);
-    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, baseY - y * (mobile ? 0.08 : 0.3), 0.038);
+    // Keep the exact desktop viewing angle on mobile; only pull the camera
+    // back proportionally so the same 3D car composition fits a narrow screen.
+    const baseX = mobile ? 7.4 : 5.2;
+    const baseY = mobile ? 3.13 : 2.2;
+    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, baseX + x * (mobile ? 0.18 : 0.5), 0.038);
+    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, baseY - y * (mobile ? 0.12 : 0.3), 0.038);
     state.camera.lookAt(0, 0.25, 0);
   });
   return null;
@@ -167,10 +167,10 @@ export default function CarScene({ reducedMotion }: { reducedMotion: boolean }) 
     <Canvas
       dpr={mobile ? [0.8, 1] : [1, 1.25]}
       camera={mobile
-        ? { position: [0, 3.0, 13.5], fov: 40 }
+        ? { position: [7.4, 3.13, 7.4], fov: 40 }
         : { position: [5.2, 2.2, 5.2], fov: 40 }}
-      gl={{ antialias: !mobile, alpha: true, powerPreference: mobile ? 'low-power' : 'high-performance' }}
-      shadows={!mobile}
+      gl={{ antialias: true, alpha: true, powerPreference: mobile ? 'low-power' : 'high-performance' }}
+      shadows
     >
       {/* ── Studio Showroom Lighting Rig ── */}
       <ambientLight intensity={0.28} color="#9a8db4" />
